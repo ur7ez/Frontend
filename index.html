@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Домашнее задание</title>
+    <meta name="author" content="Mike Nykytenko">
+    <meta name="description" content="Домашнее задание от 31.08.2017 по теме HTML">
+</head>
+<body>
+<h1>Домашнее задание по теме HTML</h1>
+<strong>Задача №1</strong>
+<h2>Список покупок</h2>
+<ul type="square">
+    <li>батон</li>
+    <li type="circle">молоко</li>
+    <li>продукты на салат</li>
+    <ol start="2">
+        <li>помидоры</li>
+        <li>огурцы</li>
+        <li>заправка</li>
+        <ol type="a">
+            <li>масло</li>
+            <li type="A">уксус</li>
+            <li>соль</li>
+        </ol>
+    </ol>
+    <li>колбаса</li>
+</ul>
+
+<br><strong>Задача №2</strong>
+<h2>График дежурств по дням</h2>
+<table border="1" rules="all" cellpadding="3" summary="График дежурств по дням">
+    <thead align="center">
+    <tr>
+        <td colspan="2" rowspan="2"></td>
+        <th colspan="7">День недели</th>
+    </tr>
+    <tr>
+        <th>пн</th>
+        <th>вт</th>
+        <th>ср</th>
+        <th>чт</th>
+        <th>пт</th>
+        <th>сб</th>
+        <th>вс</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Иван</td>
+        <td>ночь</td>
+        <td>х</td>
+        <td>х</td>
+        <td>х</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td rowspan="4">закрыто</td>
+    </tr>
+    <tr>
+        <td>Иван</td>
+        <td>день</td>
+        <td></td>
+        <td></td>
+        <td>х</td>
+        <td>х</td>
+        <td>х</td>
+    </tr>
+    <tr>
+        <td>Олег</td>
+        <td>ночь</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>х</td>
+        <td>х</td>
+        <td>х</td>
+    </tr>
+    <tr>
+        <td>Олег</td>
+        <td>день</td>
+        <td>х</td>
+        <td>х</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>х</td>
+    </tr>
+    </tbody>
+</table>
+
+<br><strong>Задача №3</strong>
+<h2>Форма регистрации</h2>
+<form action="https://www.google.com" method="post" enctype="multipart/form-data">
+    <input type="hidden" value="23243545425" name="sessid">
+    <label for="name">Имя: </label>
+    <input id="name"><br>
+    <label for="pwd">Пароль: </label>
+    <input id="pwd" type="password"> <br>
+    Пол: <label for="m">М</label> <input type="radio" id="m" name="sex" value="male" checked>
+    <label for="w">Ж</label>
+    <input type="radio" name="sex" id="w" value="woman"><br>
+    <label for="month">Месяц рождения: </label>
+    <select name="month" id="month">
+        <option value="">Январь</option>
+        <option value="">Февраль</option>
+        <option value="">Март</option>
+        <option value="">Апрель</option>
+        <option value="">Май</option>
+        <option value="">Июнь</option>
+        <option value="">Июль</option>
+        <option value="">Август</option>
+        <option value="">Сентябрь</option>
+        <option value="">Октябрь</option>
+        <option value="">Ноябрь</option>
+        <option value="">Декабрь</option>
+    </select><br>
+    <label for="age18+">Старше 18: </label><input type="checkbox" id="age18+" name="_18"><br>
+    <label for="foto">Фото: </label><input type="file" accept="image/*,image/jpeg" id="foto" name="foto"><br>
+    <input type="submit"> <input type="reset">
+</form>
+<br>
+<strong>Задача №4</strong>
+<header>
+    <h2>Введение в HTML</h2>
+</header>
+<p>Опубликовано 31.08.2017</p>
+<h3>Содержание</h3>
+<nav>
+    <ul>
+        <li><a href="#_1" title="Подсказка тут...">Что такое HTML?</a></li>
+        <li><a href="#_2" title="и тут подсказка...">Простейшая HTML-страница</a></li>
+    </ul>
+</nav>
+<article>
+    <section>
+        <a name="_1"></a>
+        <h3>Что такое HTML?</h3>
+        <p>
+            <a title="HTML - язык гипертекстовой разметки для создания страниц в сети Internet"
+               style="border-bottom: 2px dotted"><strong>HTML</strong></a> &ndash; язык гипертекстовой разметки для
+            создания
+            страниц в сети Internet.</p>
+    </section>
+    <section>
+        <a name="_2"></a>
+        <h3>Простейшая HTML-страница</h3>
+        <p>Код простейшей html-страницы выглядит следующим образом:</p>
+        <code>
+            &lt;!DOCTYPE html&gt;<br>
+            &lt;html&gt;<br>
+            &nbsp;&nbsp;&lt;head&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;Я страничка!&lt;/title&gt;<br>
+            &nbsp;&nbsp;&lt;/head&gt;<br>
+            &nbsp;&nbsp;&lt;body&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;Привет, мир!&lt;/p&gt;<br>
+            &nbsp;&nbsp;&lt;/body&gt;<br>
+            &lt;/html&gt;
+        </code>
+    </section>
+</article>
+</body>
+</html>
