@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Домашнее задание по теме CSS (2) от 14.09.2017</title>
+</head>
+<body>
+<h1>Задача №1</h1>
+<input type="checkbox"/><span>Я не отмечен</span>
+<style type="text/css">
+    body {
+        font-family: Verdana;
+        font-size: 16px;
+    }
+
+    input[type="checkbox"] {
+        left: 140px;
+        position: relative;
+        margin: 0 0 0 0;
+    }
+
+    input[type="checkbox"] + span {
+        margin: 0 10px 0 5px;
+    }
+
+    input[type="checkbox"]:checked::before {
+        content: "Я отмечен";
+        float: right;
+        margin: -3px 50px 0 0;
+        font-size: 16px;
+        font-family: Verdana;
+        width: max-content;
+    }
+
+    input[type="checkbox"]:checked + span {
+        display: none;
+    }
+</style>
+
+<h1>Задача №2</h1>
+<div class="task-2">
+    <div>4</div>
+    <div>1</div>
+    <div>3</div>
+    <div>2</div>
+    <div>6</div>
+    <div>5</div>
+</div>
+<style type="text/css">
+    .task-2 {
+        width: 250px;
+        height: 100px;
+    }
+
+    .task-2 div {
+        line-height: 50px;
+        text-align: center;
+        width: 50px;
+        height: 50px;
+        background: #DFD;
+        border: 1px solid #000;
+        box-sizing: border-box;
+    }
+
+    .task-2 div:nth-child(1) { float: right;
+    }
+
+    .task-2 div:nth-child(2) { float: left;
+    }
+
+    .task-2 div:nth-child(3) { float: right;
+    }
+
+    .task-2 div:nth-child(4) { float: right;
+    }
+
+    .task-2 div:nth-child(5) { float: right; clear: both;
+    }
+
+    .task-2 div:nth-child(6) { float: left;
+    }
+</style>
+
+<h1>Задача №3</h1>
+<div class="task-3">
+    <div>4</div>
+    <div>1</div>
+    <div>3</div>
+    <div>2</div>
+    <div>6</div>
+    <div>5</div>
+</div>
+<style type="text/css">
+    .task-3 {
+        width: 250px;
+        height: 100px;
+    }
+
+    .task-3 div {
+        line-height: 50px;
+        text-align: center;
+        width: 50px;
+        height: 50px;
+        background: #DFD;
+        border: 1px solid #000;
+        box-sizing: border-box;
+    }
+
+    .task-3 div:nth-child(1) { position: relative;
+        margin: 0 0 -50px 153px;
+    }
+
+    .task-3 div:nth-child(2) { position: relative;
+        margin: 0;
+    }
+
+    .task-3 div:nth-child(3) { position: relative;
+        margin: -50px 0 0 102px;
+    }
+
+    .task-3 div:nth-child(4) { position: relative;
+        margin: -50px 0 0 51px;
+    }
+
+    .task-3 div:nth-child(5) { position: relative;
+        margin: 1px 0 0 51px;
+    }
+
+    .task-3 div:nth-child(6) { position: relative;
+        margin: -50px 0 0 0;
+    }
+</style>
+
+<h1>Задача №4</h1>
+<div class="task-4">
+    <div>4</div>
+    <div>1</div>
+    <div>3</div>
+    <div>2</div>
+    <div>6</div>
+    <div>5</div>
+</div>
+<style type="text/css">
+    .task-4 {
+        width: 250px;
+        height: 100px;
+    }
+
+    .task-4 div {
+        line-height: 50px;
+        text-align: center;
+        width: 50px;
+        height: 50px;
+        background: #DFD;
+        border: 1px solid #000;
+        box-sizing: border-box;
+    }
+
+    .task-4 div:nth-child(1) { position: absolute;
+        left: 161px;
+    }
+
+    .task-4 div:nth-child(2) { position: absolute;
+    }
+
+    .task-4 div:nth-child(3) { position: absolute; left: 110px;
+    }
+
+    .task-4 div:nth-child(4) { position: absolute; left: 59px;
+    }
+
+    .task-4 div:nth-child(5) { position: absolute; left: 59px;
+        top: 598px;
+    }
+
+    .task-4 div:nth-child(6) { position: absolute;
+        top: 598px;
+    }
+</style>
+
+<h1>Задача №5*</h1>
+<p><b>Оригинал задачи:</b><br>
+<span><small>Проблема этого решения в том, что при наведении на блок он на долю секунды становится белым, а потом уже плавно становится красным. Подумайте, как можно убрать этот "лаг".</small></span></p>
+<div class="orig"></div>
+<style type="text/css">
+    div {
+        width: 300px;
+        height: 200px;
+    }
+</style>
+
+<p><em><b>Попытка решить:</b></em></p>
+<div class="mike"></div>
+<style type="text/css">
+    .mike {
+        overflow: hidden;
+        background: linear-gradient(135deg, #000 0%, #F00 100%) hsl(0, 100%, 50%);
+        transition: all 1000ms;
+    }
+
+    .mike:hover {
+        background: #F00;
+        transition: all 1000ms;
+    }
+
+    .orig {
+        background: #F00;
+        overflow: hidden;
+        transition: all 1000ms;
+        background: linear-gradient(135deg, #000 0%, #F00 100%);
+    }
+
+    .orig:hover {
+        background: #F00;
+        transition: all 1000ms;
+    }
+</style>
+
+</body>
+</html>
