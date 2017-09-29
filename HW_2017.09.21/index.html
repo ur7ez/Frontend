@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Твой питомец</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- для кнопок соц сетей: -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <!--<script src="https://use.fontawesome.com/3a90993db8.js"></script>-->
+    <!--подключение основного шрифта (Exo 2.0): -->
+    <link href="https://fonts.googleapis.com/css?family=Exo+2&amp;subset=cyrillic,latin-ext" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        <h1>Твой питомец</h1>
+
+    </header>
+
+    <nav class="page-nav">
+        <input type="checkbox" id="nav-menu" class="nav-menu" checked>
+        <label for="nav-menu"><i class="fa fa-bars nav-menu" aria-hidden="true"></i></label>
+        <ul>
+            <li><a href="#" onclick="event.preventDefault()">Главная</a></li>
+            <li><a href="#" onclick="event.preventDefault()">Каталог</a></li>
+            <li><a href="#" onclick="event.preventDefault()">Контакты</a></li>
+            <li><a href="#" onclick="event.preventDefault()">О нас</a></li>
+        </ul>
+    </nav>
+
+    <main class="main">
+        <section>
+            <p class="section-header">Мопс</p>
+            <div class="item-foto">
+                <img class="main-foto" src="img/mops_big.jpg" alt="Мопс" width="">
+
+                <div class="sub-fotos">
+                    <img src="img/mops_1.jpg" alt="Мопс-1" width=""></div>
+                <div class="sub-fotos">
+                    <img src="img/mops_2.jpg" alt="Мопс-2" width=""></div>
+                <div class="sub-fotos">
+                    <img src="img/mops_3.jpg" alt="Мопс-3" width="">
+                </div>
+            </div>
+            <div>
+                <table class="item-tbl">
+                    <tbody>
+                    <tr>
+                        <td>Пол:</td>
+                        <td>М</td>
+                    </tr>
+                    <tr>
+                        <td>Окрас:</td>
+                        <td>светлый</td>
+                    </tr>
+                    <tr>
+                        <td>Возраст:</td>
+                        <td>1 г</td>
+                    </tr>
+                    <tr>
+                        <td>Вес:</td>
+                        <td>10 кг</td>
+                    </tr>
+                    <tr>
+                        <td>Рост:</td>
+                        <td>30 см</td>
+                    </tr>
+                    <tr>
+                        <td>Родина:</td>
+                        <td>Китай</td>
+                    </tr>
+                    <tr>
+                        <td>Цена:</td>
+                        <td>3000 грн</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <!--При клике на кнопку "Купить" изменяется её тень. Фон у кнопки в виде градиента.-->
+        <a href="" onclick="event.preventDefault()">
+            <div class="btn-buy">Купить</div>
+        </a>
+
+        <p class="social-links item-bold">Поделиться:
+            <a href="#" onclick="event.preventDefault()" style="color: #4267b2;"><i class="fa fa-facebook-official"
+                                                                                    aria-hidden="true"></i></a>
+            <a href="#" onclick="event.preventDefault()" style="color: #c74b35;"><i
+                    class="fa fa-google-plus-official" aria-hidden="true"></i></a>
+            <a href="#" onclick="event.preventDefault()" style="color: #46a8d2;"><i class="fa fa-twitter"
+                                                                                    aria-hidden="true"></i></a>
+            <a href="#" onclick="event.preventDefault()" style="color: #bd081c;"><i class="fa fa-pinterest"
+                                                                                    aria-hidden="true"></i></a>
+        </p>
+        <section>
+            <p><span class="item-bold">Доставка:</span> доставка курьером или самовывоз из питомника в вашем городе.</p>
+            <p><span class="item-bold">Оплата:</span> 100% предоплата на карту банка, наложенный платеж, оплата
+                наличными курьеру при получении.</p>
+        </section>
+        <article class="anime-1">
+            <h3>С Мопс также покупают:</h3>
+            <div class="supl-offer">
+                <img src="img/malamut.jpeg" alt="Маламут" width="">
+                <p class="item-bold">Маламут</p>
+            </div>
+            <div class="supl-offer">
+                <img src="img/akita.jpg" alt="Акита Ину" width="">
+                <p class="item-bold">Акита Ину</p>
+            </div>
+            <div class="supl-offer">
+                <img src="img/retriver.png" alt="Ретривер" width="">
+                <p class="item-bold">Ретривер</p>
+            </div>
+        </article>
+    </main>
+
+    <aside class="side-nav">
+        <article class="catalog">
+            <p class="section-header">Каталог</p>
+            <div>
+                <ul>
+                    <li><a href="" onclick="event.preventDefault()">Собаки</a></li>
+                    <li><a href="" onclick="event.preventDefault()">Кошки</a></li>
+                    <li><a href="" onclick="event.preventDefault()">Рыбки</a></li>
+                    <li><a href="" onclick="event.preventDefault()">Хомяки</a></li>
+                    <li><a href="" onclick="event.preventDefault()">Другое</a></li>
+                </ul>
+            </div>
+        </article>
+        <article class="promotion">
+            <p class="section-header">Акции</p>
+            <h3>
+                <img src="img/korgi.jpg" alt="Скидка на щенков корги" width="">
+                <br>Скидка на щенков корги 15%<br>Осталось три дня!
+            </h3>
+        </article>
+        <article class="articles">
+            <p class="section-header">Статьи</p>
+            <div>
+                <ul>
+                    <li><a href="" onclick="event.preventDefault()">Впадают ли хомяки в спячку?</a></li>
+                    <li><a href="" onclick="event.preventDefault()">Кошка и дети в семье</a></li>
+                    <li><a href="" onclick="event.preventDefault()">Собачий домик 2.0</a></li>
+                    <li><a href="" onclick="event.preventDefault()">Чем кормить таксу</a></li>
+                    <li><a href="" onclick="event.preventDefault()">Лакомства пернатых</a></li>
+                </ul>
+            </div>
+        </article>
+    </aside>
+    <footer class="footer">
+        © Твой питомец, 2017
+    </footer>
+</div>
+</body>
+</html>

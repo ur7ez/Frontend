@@ -1,0 +1,289 @@
+@media (min-width: 800px) and (max-width: 1023px) {
+    body {
+        max-width: 800px;
+        font-size: 18px;
+        font-family: 'Exo 2', Helvetica, Arial, sans-serif;
+        margin: 0 auto;
+        padding: 0 1px;
+        background: black;
+    }
+
+    a {
+        text-decoration: none;
+        color: unset;
+    }
+
+    h3 {
+        text-align: center;
+    }
+
+    p {
+        font-size: 1em;
+        line-height: 1.3em;
+    }
+
+    ul li {
+        list-style-type: none;
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        background: url("../img/diagmonds-light.png") #689F38;
+    }
+
+    section {
+        display: inline-block;
+    }
+
+    .item-bold {
+        font-weight: bold;
+    }
+
+    /* HEADER */
+    .header, .page-nav {
+        background-color: #33691e;
+        color: #F1F8E9;
+        border-bottom: 2px #F1F8E9 solid;
+        padding: 5px 0;
+    }
+
+    .header h1 {
+        /*margin: 0;*/
+        padding: 0 0 0 10px;
+        display: inline;
+    }
+
+
+
+    /* NAVIGATION */
+    .nav-menu {
+        display: none;
+    }
+
+    .page-nav {
+        margin: -2px auto 0;
+        /*height: 1.8em;*/
+        display: flow-root;
+        border-radius: 0 0 5px 5px;
+        padding: 0 0;
+        /*box-sizing: border-box;*/
+    }
+
+    .page-nav li {
+        float: left;
+        width: 25%;
+    }
+
+    .page-nav a {
+        display: block;
+        color: #F1F8E9;
+        /*font-weight: bold;*/
+        text-align: center;
+        height: 1.8em;
+        padding-top: 3px;
+        box-sizing: border-box;
+    }
+
+    .page-nav li a:hover {
+        /*color: yellowgreen;*/
+        transition-property: background-color;
+        transition: all 1000ms ease;
+        background-color: #AED581;
+    }
+
+    /* MAIN PART */
+    .main {
+        float: right;
+        margin: 35px 0 10px 0;
+    }
+
+    .main, .side-nav {
+        margin: 22px 0 10px 0;
+        background-color: #F1F8E9;
+        padding: 0 5px 10px 5px;
+        box-sizing: border-box;
+    }
+
+    .side-nav {
+        margin-top: 1px;
+    }
+
+    .section-header {
+        padding-top: 8px;
+        margin: 0 0 20px 0;
+        font-size: 2em;
+        font-weight: bold;
+        border-bottom: 2px solid #689F38;
+    }
+
+    .item-foto {
+        width: 50%;
+        float: left;
+    }
+
+    .main-foto {
+        width: 100%;
+        z-index: 100;
+        position: relative;
+    }
+
+    .main-foto:hover {
+        transform: scale(1.15, 1.15);
+        transform-origin: 0;
+        /*transition-property: width;*/
+        transition: all 500ms ease;
+    }
+
+    .sub-fotos img {
+        width: 100%;
+        height: 100px;
+        filter: grayscale(100%);
+    }
+
+    .sub-fotos {
+        width: 31.9%;
+        float: left;
+        display: inline-block;
+        margin-right: 4px;
+        margin-top: 3px;
+        position: relative;
+    }
+
+    .sub-fotos img:hover {
+        filter: none;
+    }
+
+    .item-tbl {
+        width: 48%;
+        /*line-height: 1em;*/
+        /*position: relative;*/
+        float: right;
+        border-spacing: 0;
+    }
+
+    .item-tbl tr td:first-of-type {
+        text-align: left;
+        padding-left: 10px;
+        font-weight: bold;
+    }
+
+    .item-tbl tr td:last-of-type {
+        text-align: right;
+        padding-right: 10px;
+    }
+
+    .item-tbl tr:nth-of-type(odd) {
+        background: #d8dfd1;
+    }
+
+    .btn-buy {
+        clear: both;
+        font-size: 2em;
+        width: 9em;
+        height: 1.5em;
+        text-align: center;
+        margin: 0.6em auto;
+        color: #F1F8E9;
+        border-radius: 0.6em;
+        background: #33691E;
+        background: linear-gradient(to bottom, #33691E 0%, #689F38 100%);
+        box-shadow: 0 0 10px 2px #689F38;
+    }
+
+    .btn-buy:active {
+        box-shadow: 0 0 4px 1px #689F38;
+    }
+
+    aside .section-header {
+        font-size: 1.5em;
+    }
+
+    .section-header:first-letter {
+        color: #689F38;
+    }
+
+    .social-links {
+        margin: 7px auto;
+        text-align: center;
+        clear: both;
+    }
+
+    .social-links a {
+        font-size: 1.7em;
+    }
+
+    .supl-offer {
+        width: 225px;
+        text-align: center;
+        display: inline-block;
+        padding: 12px 10px 12px 16px;
+        position: relative;
+        /*background: #F1F8E9;*/
+    }
+
+    .supl-offer img {
+        width: 100%;
+    }
+
+    .supl-offer p {
+        width: inherit;
+        position: absolute;
+        margin: 0 0 11px 0;
+        padding: 7px 0;
+        bottom: 0;
+        background-color: #33691E;
+        background-color: rgba(51, 105, 30, 0.78);
+        color: #F1F8E9;
+    }
+
+    /* ASIDE*/
+    .side-nav {
+        width: 100%;
+        float: left;
+    }
+
+    .side-nav a {
+        color: #689F38;
+    }
+
+    .side-nav a:hover {
+        text-decoration: underline;
+    }
+
+    .side-nav article div {
+        padding-left: 10px;
+    }
+
+    .catalog {
+        float: left;
+        width: 49%;
+        padding-right: 7px;
+    }
+
+    .promotion {
+        float: left;
+        width: 50%;
+    }
+
+    .promotion img {
+        margin: 0 0 15px 0;
+    }
+
+    .articles {
+        clear: both;
+    }
+
+    /* FOOTER */
+    .footer {
+        background-color: #33691e;
+        color: #F1F8E9;
+        /*margin-top: 13px;*/
+        border-top: 2px #F1F8E9 solid;
+        padding: 15px 0;
+        clear: both;
+    }
+}
