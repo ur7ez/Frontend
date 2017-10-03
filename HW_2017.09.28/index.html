@@ -19,7 +19,7 @@
     } else if ((hour === 13 && minute >= 30) || (hour === 14 && minute <= 30)) {
         state = 'на перерыве';
     }
-    console.log('В ' + hour + ':' + minute + ' ' + (day + 1) + 'го дня недели статус магазина: ' + state);
+    console.log('Задача №1: в ' + hour + ':' + minute + ' ' + (day + 1) + 'го дня недели статус магазина: ' + state);
 </script>
 
 <h1>Задача №2</h1>
@@ -40,7 +40,9 @@
     <!-- не понимаю, зачем тут нужен continue ? -->
     var sum2 = 0;
     for (var i = 1; i < 30; i++) {
-        if ((i % 2) && !(i % 3)) {
+        if (!(i % 2) || (i % 3)) {
+            continue;
+        } else {   //(i % 2) && !(i % 3) === true
             sum2 += i;
         }
     }
@@ -67,7 +69,7 @@
     var a = 10, b = 5;
     var mediate = new Function(
         'a, b',
-        "return console.log('Задача №5: среднее арифметическое чисел ' + a+' и ' + b + ':', (a + b) / 2);"
+        "console.log('Задача №5: среднее арифметическое чисел ' + a+' и ' + b + ':', (a + b) / 2);"
     );
     mediate(a, b);
 </script>
@@ -90,12 +92,19 @@
 <span>Написать функцию, расчета стоимости электроэнергии, потребленной двигателем в течение суток. Мощность двигателя - 2.5 кВт. Цена 1 кВт*ч - 1.68 грн. В период с 23:00 до 7:00 тариф уменьшается в два раза. На вход программа получает время начала и время завершения работы двигателя (часы, целое число от 0 до 24). Использовать Function Expression. Результат вывести в консоль.</span>
 
 <script>
+    //    var startHour = 0, endHour = 7;
     var startHour = 6, endHour = 24;
-
     var countEnergyCost = function (startHour, endHour) {
         var price = 1.68;
         var power = 2.5;
-        var low_hours = ((endHour > 23) ? (endHour - 23) : 0) + ((startHour < 7) ? (-startHour + 7) : 0);
+        var low_hours = 0;
+        if (endHour > 23) {
+            low_hours = endHour - 23;
+        } else if (endHour > 7) {
+            low_hours += (startHour < 7) ? (7 - startHour) : 0;
+        } else { //endHour <= 7
+            low_hours += (endHour - startHour);
+        }
         return power * price * ((endHour - startHour) - 0.5 * low_hours);
     };
     console.log('Задача №7: в период с ' + startHour + ' до ' + endHour + ' часов потреблено энергии на  ' + countEnergyCost(startHour, endHour).toFixed(2) + ' грн. ');
