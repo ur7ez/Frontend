@@ -12,12 +12,13 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<div class="container">
-    <header class="header">
+
+<header class="header">
+    <div>
         <h1>Твой питомец</h1>
-
-    </header>
-
+    </div>
+</header>
+<div class="container">
     <nav class="page-nav">
         <input type="checkbox" id="nav-menu" class="nav-menu" checked>
         <label for="nav-menu"><i class="fa fa-bars nav-menu" aria-hidden="true"></i></label>
@@ -78,10 +79,11 @@
                 </table>
             </div>
         </section>
+
         <!--При клике на кнопку "Купить" изменяется её тень. Фон у кнопки в виде градиента.-->
-        <a href="" onclick="event.preventDefault()">
-            <div class="btn-buy">Купить</div>
-        </a>
+        <div class="btn-buy">
+            <a href="" onclick="event.preventDefault()">Купить</a>
+        </div>
 
         <p class="social-links item-bold">Поделиться:
             <a href="#" onclick="event.preventDefault()" style="color: #4267b2;"><i class="fa fa-facebook-official"
@@ -148,9 +150,13 @@
             </div>
         </article>
     </aside>
-    <footer class="footer">
-        © Твой питомец, 2017
-    </footer>
 </div>
+
+<footer class="footer">
+    <div>
+        © Твой питомец, 2017
+    </div>
+</footer>
+
 </body>
 </html>

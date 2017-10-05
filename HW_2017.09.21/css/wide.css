@@ -1,10 +1,14 @@
-@media (min-width: 1024px) {
+@media (min-width: 801px) {
     body {
-        max-width: 1024px;
         font-size: 16px;
         font-family: 'Exo 2', Helvetica, Arial, sans-serif;
         margin: 0 auto;
-        background: black;
+        background: url("../img/diagmonds-light.png") #689F38;
+    }
+
+    .container {
+        max-width: 1024px;
+        margin: 0 auto;
     }
 
     a {
@@ -30,10 +34,6 @@
         padding: 0;
     }
 
-    .container {
-        background: url("../img/diagmonds-light.png") #689F38;
-    }
-
     section {
         display: inline-block;
     }
@@ -54,6 +54,11 @@
         /*margin: 0;*/
         padding: 0 0 0 10px;
         display: inline;
+    }
+
+    .header div, .footer div {
+        max-width: 1024px;
+        margin: 0 auto;
     }
 
     /* NAVIGATION */
@@ -90,7 +95,6 @@
     }
 
     .page-nav li a:hover {
-        /*color: yellowgreen;*/
         transition-property: background-color;
         transition: all 1000ms ease;
         background-color: #AED581;
@@ -132,8 +136,7 @@
     .main-foto:hover {
         transform: scale(1.15, 1.15);
         transform-origin: 0;
-        /*transition-property: width;*/
-        transition: all 500ms ease;
+        transition: transform 500ms ease;
     }
 
     .sub-fotos img {
@@ -148,7 +151,11 @@
         display: inline-block;
         margin-right: 4px;
         margin-top: 3px;
-        position: relative;
+        /*position: relative;*/
+    }
+
+    .sub-fotos:last-child {
+        margin-right: 0;
     }
 
     .sub-fotos img:hover {
@@ -181,7 +188,7 @@
     .btn-buy {
         clear: both;
         font-size: 2em;
-        width: 9em;
+        width: 280px;
         height: 1.5em;
         text-align: center;
         margin: 0.6em auto;
@@ -190,6 +197,11 @@
         background: #33691E;
         background: linear-gradient(to bottom, #33691E 0%, #689F38 100%);
         box-shadow: 0 0 10px 2px #689F38;
+    }
+
+    .btn-buy a {
+        display: block;
+        height: inherit;
     }
 
     .btn-buy:active {
@@ -215,12 +227,10 @@
     }
 
     .supl-offer {
-        width: 190px;
-        text-align: center;
+        width: 28%;
         display: inline-block;
         padding: 12px;
         position: relative;
-        /*background: #F1F8E9;*/
     }
 
     .supl-offer img {
@@ -228,14 +238,16 @@
     }
 
     .supl-offer p {
-        width: inherit;
-        position: absolute;
-        margin: 0 0 11px 0;
+        position: relative;
+        margin: -34px 0 0 0;
         padding: 7px 0;
-        bottom: 0;
         background-color: #33691E;
         background-color: rgba(51, 105, 30, 0.78);
         color: #F1F8E9;
+    }
+
+    .anime-1 {
+        text-align: center;
     }
 
     .anime-1 > div {
@@ -273,7 +285,7 @@
 
     /* ASIDE*/
     .side-nav {
-        width: 33%;
+        width: 32%;
         float: left;
     }
 

@@ -2,7 +2,7 @@
 @import "narrow.css";
 @import "wide.css";
 
-@media (max-width: 799px) {
+@media (max-width: 480px) {
     body {
         max-width: 480px;
         min-width: 480px;
@@ -89,6 +89,8 @@
         display: flow-root;
         padding: 0 0;
         border-bottom: 0;
+        position: absolute;
+        z-index: 1000;
         /*box-sizing: border-box;*/
     }
 
@@ -154,11 +156,15 @@
 
     .sub-fotos {
         width: 31.9%;
-        float: left;
+        /*float: left;*/
         display: inline-block;
         margin-right: 4px;
         margin-top: 1px;
-        position: relative;
+        /*position: relative;*/
+    }
+
+    .sub-fotos:last-child {
+        margin-right: 0;
     }
 
     .sub-fotos img:hover {
@@ -190,7 +196,7 @@
     .btn-buy {
         clear: both;
         font-size: 2em;
-        width: 7.5em;
+        width: 280px;
         height: 1.5em;
         text-align: center;
         margin: 0.6em auto;
@@ -199,6 +205,11 @@
         background: #33691E;
         background: linear-gradient(to bottom, #33691E 0%, #689F38 100%);
         box-shadow: 0 0 10px 2px #689F38;
+    }
+
+    .btn-buy a {
+        display: block;
+        height: inherit;
     }
 
     .btn-buy:active {
@@ -231,7 +242,6 @@
         display: block;
         padding: 12px;
         position: relative;
-        /*background: #F1F8E9;*/
     }
 
     .supl-offer img {
