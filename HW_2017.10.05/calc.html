@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Калькулятор</title>
+</head>
+<body>
+<h1>Задача №1. Калькулятор</h1>
+<p style="color:#666666;font-family:Helvetica, Arial, sans-serif;font-size:20px;">Написать простой калькулятор, который
+    через&nbsp;<strong>prompt</strong>&nbsp;будет запрашивать у пользователя первый операнд (число), арифметическое
+    действие ("+-/*"), второй операнд (число) и выводить результат вычислений в&nbsp;<strong>alert</strong>. Если на
+    любом из этапов ввод неправильный - не переходить к следующему этапу. Не использовать&nbsp;<strong>eval</strong>.
+    Оформить код в отдельный файл&nbsp;<u>calc.html</u>.</p>
+<script>
+    operand1 = parseFloat(prompt('Введите первый операнд (число):'));
+    if (!isNaN(operand1)) {
+        operation = prompt('Введите арифметическое действие ("+", "-", "/" или "*"):');
+        if (['+', '-', '/', '*'].indexOf(operation) !== -1) {
+            operand2 = parseFloat(prompt('Введите второй операнд (число):'));
+            if (!isNaN(operand2)) {
+                switch (operation) {
+                    case '+':
+                        res = operand1 + operand2;
+                        break;
+                    case '-':
+                        res = operand1 - operand2;
+                        break;
+                    case '/':
+                        res = operand1 / operand2;
+                        break;
+                    case '*':
+                        res = operand1 * operand2;
+                        break;
+                }
+                alert('Результат вычислений: ' + operand1 + ' ' + operation + ' ' + operand2 + '= ' + res);
+            }
+        }
+    }
+</script>
+</body>
+</html>
