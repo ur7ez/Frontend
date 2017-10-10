@@ -49,7 +49,7 @@
 
     function sortSalaries(salaryList) {
         var salaryListCopy = salaryList.slice();
-        var mult = 10000;
+        var mult = Math.max.apply(null, salaryListCopy);
         for (var i = 0; i < salaryListCopy.length; i++) {
             salaryListCopy[i] /= mult;
         }
@@ -84,10 +84,8 @@
     var mayBeSquares = [1, 2, 3, 4, 8, 9, 15, 16, 34, 36, 38, 24, 25, 26];
 
     function extractSquares(nums) {
-        return nums.filter(function (val1, i, arr) {
-            return arr.some(function (val2) {
-                return (Math.pow(val2, 2) === val1);
-            })
+        return nums.filter(function (val) {
+            return ((Math.pow(val, .5) ^ 0) === Math.pow(val, .5));
         });
     }
 
@@ -128,36 +126,34 @@
     ];
 
     function balance(actions) {
-        var itemsIn = 0;
-        var itemsOut = 0;
+        var itemsIn;
+        var itemsOut;
         var itemsAvailable = [];
         var items_out_tmp = [];
 
-        actions.forEach(function (val, i, arr) {
+        actions.forEach(function (val, i) {
             if (!(i % 2)) { // поступления
-                itemsIn += arr[i].length;
                 val.length > 0 ? itemsAvailable.push(val) : true;
             } else {        // отправка
-                itemsOut += arr[i].length;
                 val.length > 0 ? items_out_tmp.push(val) : true;
             }
         });
         itemsAvailable = itemsAvailable.toString().split(',');
+        itemsIn = itemsAvailable.length;
         items_out_tmp = items_out_tmp.toString().split(',');
-
+        itemsOut = items_out_tmp.length;
         items_out_tmp.forEach(function (val) {
             var in_out = itemsAvailable.indexOf(val);
             if (in_out !== -1) {
                 itemsAvailable.splice(in_out, 1);
             }
         });
-
         console.log('Задача №7. Пришло: ' + itemsIn + ', ' +
             'Отправлено: ' + itemsOut + '\n' +
             'Товары на складе: ' + itemsAvailable);
     }
 
-    console.log(balance(transactions));
+    balance(transactions);
 </script>
 
 </body>

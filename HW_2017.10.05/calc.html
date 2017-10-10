@@ -12,30 +12,37 @@
     любом из этапов ввод неправильный - не переходить к следующему этапу. Не использовать&nbsp;<strong>eval</strong>.
     Оформить код в отдельный файл&nbsp;<u>calc.html</u>.</p>
 <script>
-    operand1 = parseFloat(prompt('Введите первый операнд (число):'));
-    if (!isNaN(operand1)) {
-        operation = prompt('Введите арифметическое действие ("+", "-", "/" или "*"):');
-        if (['+', '-', '/', '*'].indexOf(operation) !== -1) {
-            operand2 = parseFloat(prompt('Введите второй операнд (число):'));
-            if (!isNaN(operand2)) {
-                switch (operation) {
-                    case '+':
-                        res = operand1 + operand2;
-                        break;
-                    case '-':
-                        res = operand1 - operand2;
-                        break;
-                    case '/':
-                        res = operand1 / operand2;
-                        break;
-                    case '*':
-                        res = operand1 * operand2;
-                        break;
-                }
-                alert('Результат вычислений: ' + operand1 + ' ' + operation + ' ' + operand2 + '= ' + res);
-            }
-        }
+    err_str = 'Введенное значение не соответсвует требованиям. Повторите попытку. ';
+    i = 0;
+    do {
+        var operand1 = parseFloat(prompt(((i > 0) ? (err_str + '\n') : '') + 'Введите первый операнд (число):'));
+        i++;
+    } while (isNaN(operand1));
+    i = 0;
+    do {
+        var operation = prompt(((i > 0) ? (err_str + '\n') : '') + 'Введите арифметическое действие ("+", "-", "/" или "*"):');
+        i++;
+    } while (['+', '-', '/', '*'].indexOf(operation) === -1);
+    i = 0;
+    do {
+        var operand2 = parseFloat(prompt(((i > 0) ? (err_str + '\n') : '') + 'Введите второй операнд (число):'));
+        i++;
+    } while (isNaN(operand2));
+    switch (operation) {
+        case '+':
+            res = operand1 + operand2;
+            break;
+        case '-':
+            res = operand1 - operand2;
+            break;
+        case '/':
+            res = operand1 / operand2;
+            break;
+        case '*':
+            res = operand1 * operand2;
+            break;
     }
+    alert('Результат вычислений: ' + operand1 + ' ' + operation + ' ' + operand2 + ' = ' + res);
 </script>
 </body>
 </html>
