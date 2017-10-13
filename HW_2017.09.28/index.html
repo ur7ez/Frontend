@@ -98,8 +98,12 @@
         var price = 1.68;
         var power = 2.5;
         var low_hours = 0;
+        if (startHour >= endHour) {
+            return 0;
+        }
         if (endHour > 23) {
             low_hours = endHour - 23;
+            low_hours += (startHour < 7) ? (7 - startHour) : 0;
         } else if (endHour > 7) {
             low_hours += (startHour < 7) ? (7 - startHour) : 0;
         } else { //endHour <= 7
