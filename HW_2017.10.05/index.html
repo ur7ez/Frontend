@@ -148,12 +148,12 @@
                 itemsAvailable.splice(in_out, 1);
             }
         });
-        console.log('Задача №7. Пришло: ' + itemsIn + ', ' +
-            'Отправлено: ' + itemsOut + '\n' +
-            'Товары на складе: ' + itemsAvailable);
+        return 'Пришло: ' + itemsIn + '; ' +
+            'Отправлено: ' + itemsOut + '; ' +
+            'Товары на складе: ' + itemsAvailable;
     }
 
-    balance(transactions);
+    console.log(balance(transactions));
 </script>
 
 </body>
