@@ -114,9 +114,9 @@ var spammer = {
 		if (this.spam.spam_list.indexOf(anyStr) === -1) {
 			this.spam.spam_list.push(anyStr);
 		}
-		if (this.spam.spam_list.length == 1 || this.spam.TimeIntervalID === 0) {
+		if (this.spam.spam_list.length === 1 || this.spam.TimeIntervalID === 0) {
 			this.spam.TimeIntervalID = setInterval(function go() {
-				log_info = '';
+				var log_info = '';
 				// var date = new Date();
 				// log_info = " //" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
 				console.log(spammer.spam.spam_list.join('\n'), log_info);
@@ -129,7 +129,7 @@ var spammer = {
 			clearInterval(this.spam.TimeIntervalID);
 			this.spam.TimeIntervalID = 0;
 		} else {
-			isInSpamList = this.spam.spam_list.indexOf(anyStr);
+			var isInSpamList = this.spam.spam_list.indexOf(anyStr);
 			if (isInSpamList !== -1) {
 				this.spam.spam_list.splice(isInSpamList, 1);
 				if (this.spam.spam_list.length === 0) {
@@ -139,13 +139,13 @@ var spammer = {
 			}
 		}
 	},
-	spam: { spam_list: [], TimeIntervalID: 0 },
+	spam: { spam_list: [], TimeIntervalID: 0 }
 };
 
 spammer.startSpam('first');
-// spammer.startSpam('second');
-// spammer.stopSpam('first');
-// spammer.stopSpam();
+spammer.startSpam('second');
+spammer.stopSpam('first');
+spammer.stopSpam();
 
 
 // Задача №5. Улучшатор текста
