@@ -110,46 +110,42 @@ second // 00:00:06
 */
 
 var spammer = {
-    startSpam: function (someStr) {
-        this.core(someStr, 'start');
-    },
-    stopSpam: function (someStr) {
-        this.core(someStr, 'stop');
-    },
-    spam_list: ['first', 'second', 'third'],
-    spam: {},
-    core: function (anyStr, action) {
-        // собственно, ядро генератора спама
-        switch (action) {
-            case "start":
-                if (spammer.spam_list.indexOf(anyStr) === -1) {
-                    spammer.spam_list.push(anyStr);
-                }
-                if (!(anyStr in this.spam)) {
-                    this.spam[anyStr] = setInterval(function go() {
-                        var date = new Date();
-                        console.log(anyStr, " //", date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds());
-                    }, 1000);
-                }
-                break;
-            case "stop":
-                if (arguments[0] === undefined || anyStr === '') {
-                    // stop All the spam stings
-                    for (var prop in this.spam) {
-                        clearInterval(this.spam[prop]);
-                        delete this.spam[prop];
-                    }
-                } else if (anyStr in this.spam) {
-                    clearInterval(this.spam[anyStr]);
-                    delete this.spam[anyStr];
-                }
-        }
-    }
+	startSpam: function(anyStr) {
+		if (this.spam.spam_list.indexOf(anyStr) === -1) {
+			this.spam.spam_list.push(anyStr);
+		}
+		if (this.spam.spam_list.length == 1 || this.spam.TimeIntervalID === 0) {
+			this.spam.TimeIntervalID = setInterval(function go() {
+				log_info = '';
+				// var date = new Date();
+				// log_info = " //" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+				console.log(spammer.spam.spam_list.join('\n'), log_info);
+			}, 1000);
+		}
+	},
+	stopSpam: function(anyStr) {
+		if (anyStr === undefined || anyStr === '') {
+			// stop All the spam stings
+			clearInterval(this.spam.TimeIntervalID);
+			this.spam.TimeIntervalID = 0;
+		} else {
+			isInSpamList = this.spam.spam_list.indexOf(anyStr);
+			if (isInSpamList !== -1) {
+				this.spam.spam_list.splice(isInSpamList, 1);
+				if (this.spam.spam_list.length === 0) {
+					clearInterval(this.spam.TimeIntervalID);
+					this.spam.TimeIntervalID = 0;
+				}
+			}
+		}
+	},
+	spam: { spam_list: [], TimeIntervalID: 0 },
 };
 
 spammer.startSpam('first');
-spammer.startSpam('second');
-spammer.stopSpam('first');
+// spammer.startSpam('second');
+// spammer.stopSpam('first');
+// spammer.stopSpam();
 
 
 // Задача №5. Улучшатор текста
