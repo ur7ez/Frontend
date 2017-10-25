@@ -6,6 +6,7 @@
 //поскольку параметр ф-ции совпадает с именем переменной в объекте Scope, то для корректной работы нужно
 //явно определить "конфликтующую" переменную внутри LE функции и передать значение параметра.
 
+//Вариант 1:
 var user = {};
 var newFirstName = "boris";
 var newFirstName2 = "basil";
@@ -21,13 +22,33 @@ function setNewName(newFirtsName) {
 user.setNewName = setNewName;
 user.setNewName(newFirstName); // user.name = "-=Boris=-", OK
 user.setNewName(newFirstName2); // user.name = "-=Boris=-", ???
-// console.log(user.name);
+console.log(user.name);
+
+//Вариант 2:
+/*
+var user = {};
+var newFirstName = "boris";
+var newFirstName2 = "basil";
+
+function setNewName(x) {
+    var capitalizedName = x[0].toUpperCase() +
+        x.substr(1);
+    var prettyfiedName = "-=" + capitalizedName + "=-";
+    this.name = prettyfiedName;
+}
+
+user.setNewName = setNewName;
+user.setNewName(newFirstName); // user.name = "-=Boris=-", OK
+user.setNewName(newFirstName2); // user.name = "-=Boris=-", ???
+console.log(user.name);
+*/
 
 // Задача №2
 // Написать функцию-конструктор, все созданные объекты которой равны между собой.
 
+var someObj = {};
 var Clone = function () {
-    return Object;
+    return someObj;
 };
 var clone1 = new Clone;
 var clone2 = new Clone;
@@ -108,8 +129,8 @@ var Pet = function (petType, nickName, birthYear) {
         enumerable: false
     });
     Object.defineProperty(Pet, "info", {
-        get: function() {
-            return this.type + " " + this.name + ": " +  (mdate.getFullYear() - this.birthYear) + " years";
+        get: function () {
+            return this.type + " " + this.name + ": " + (mdate.getFullYear() - this.birthYear) + " years";
         }
     });
     return Pet;
@@ -129,14 +150,14 @@ console.log(myPet.info); // "cat Murzik: 2 years"
 // Написать функцию-конструктор, которая принимает параметр год и записывает его в свойство объекта. У созданного объекта:
 //   при работе как со строкой выводится дополнительная информация, високосный год или нет
 //   при работе как с числом выводится только значение года
-var Years = function(year) {
+var Years = function (year) {
     var Years = {};
     Years.year = year;
     Years.toString = function () {
         var leapYear = "не ";
         //определяем високосный ли год:
         if (!(year % 4) && ((year % 100) || !(year % 400))) {
-            leapYear ="";
+            leapYear = "";
         }
         return this.year + ", " + leapYear + "високосный";
     };
