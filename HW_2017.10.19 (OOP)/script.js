@@ -59,43 +59,39 @@ console.log(clone1 == clone2); // true
 // Написать функцию-конструктор, которая принимает один параметр - время в миллисекундах, и записывает в свойства возвращаемого объекта-спамера. У объекта также есть метод startSpam, которому передается строка для спама. После вызова метода спамер с указанным временным промежутком спамит в консоль.
 
 function Spammer(spamInterval) {
-    var spammer = {
-        startSpam: function (anyStr) {
-            if (this.spam.spam_list.indexOf(anyStr) === -1) {
-                this.spam.spam_list.push(anyStr);
-            }
-            if (this.spam.spam_list.length === 1 || this.spam.TimeIntervalID === undefined) {
-                this.spam.TimeIntervalID = setInterval(function go(t) {
-                    var log_info = '';
-                    // var date = new Date();
-                    // log_info = " //" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-                    console.log(t, log_info);
-                }, this.spamInt, this.spam.spam_list.join('\n'));
-            }
-        },
-        stopSpam: function (anyStr) {
-            if (anyStr === undefined || anyStr === '') {
-                // stop All the spam stings
-                clearInterval(this.spam.TimeIntervalID);
-                this.spam.TimeIntervalID = undefined;
-            } else {
-                var isInSpamList = this.spam.spam_list.indexOf(anyStr);
-                if (isInSpamList !== -1) {
-                    this.spam.spam_list.splice(isInSpamList, 1);
-                    if (this.spam.spam_list.length === 0) {
-                        clearInterval(this.spam.TimeIntervalID);
-                        this.spam.TimeIntervalID = undefined;
-                    }
+    if (!isNaN(parseFloat(spamInterval))) {
+        this.spamInt = spamInterval;
+    }
+    this.startSpam = function (anyStr) {
+        if (this.spam.spam_list.indexOf(anyStr) === -1) {
+            this.spam.spam_list.push(anyStr);
+        }
+        if (this.spam.spam_list.length === 1 || this.spam.TimeIntervalID === undefined) {
+            this.spam.TimeIntervalID = setInterval(function go(t) {
+                var log_info = '';
+                // var date = new Date();
+                // log_info = " //" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+                console.log(t, log_info);
+            }, this.spamInt, this.spam.spam_list.join('\n'));
+        }
+    };
+    this.stopSpam = function (anyStr) {
+        if (anyStr === undefined || anyStr === '') {
+            // stop All the spam stings
+            clearInterval(this.spam.TimeIntervalID);
+            this.spam.TimeIntervalID = undefined;
+        } else {
+            var isInSpamList = this.spam.spam_list.indexOf(anyStr);
+            if (isInSpamList !== -1) {
+                this.spam.spam_list.splice(isInSpamList, 1);
+                if (this.spam.spam_list.length === 0) {
+                    clearInterval(this.spam.TimeIntervalID);
+                    this.spam.TimeIntervalID = undefined;
                 }
             }
-        },
-        spam: {spam_list: [], TimeIntervalID: undefined}
+        }
     };
-
-    if (!isNaN(parseFloat(spamInterval))) {
-        spammer.spamInt = spamInterval;
-        return spammer;
-    }
+    this.spam = {spam_list: [], TimeIntervalID: undefined};
 }
 
 var spammer1 = new Spammer(1000);
@@ -112,29 +108,27 @@ spammer2.stopSpam();
 //  год рождения не отображается при переборе через for-in
 //  свойство info отображает строку вида "ТИП КЛИЧКА: ВОЗРАСТ лет"
 
-var Pet = function (petType, nickName, birthYear) {
+function Pet (petType, nickName, birthYear) {
     var mdate = new Date();
-    var Pet = {};
-    Object.defineProperty(Pet, "type", {
+    Object.defineProperty(this, "type", {
         value: petType,
         configurable: false,
         writable: false,
         enumerable: true
     });
-    Pet.name = nickName;
-    Object.defineProperty(Pet, "birthYear", {
+    this.name = nickName;
+    Object.defineProperty(this, "birthYear", {
         value: birthYear,
         configurable: false,
         writable: false,
         enumerable: false
     });
-    Object.defineProperty(Pet, "info", {
+    Object.defineProperty(this, "info", {
         get: function () {
             return this.type + " " + this.name + ": " + (mdate.getFullYear() - this.birthYear) + " years";
         }
     });
-    return Pet;
-};
+}
 
 var myPet = new Pet("cat", "Barsik", 2015);
 for (var key in myPet) {
@@ -150,10 +144,9 @@ console.log(myPet.info); // "cat Murzik: 2 years"
 // Написать функцию-конструктор, которая принимает параметр год и записывает его в свойство объекта. У созданного объекта:
 //   при работе как со строкой выводится дополнительная информация, високосный год или нет
 //   при работе как с числом выводится только значение года
-var Years = function (year) {
-    var Years = {};
-    Years.year = year;
-    Years.toString = function () {
+function Years (year) {
+    this.year = year;
+    this.toString = function () {
         var leapYear = "не ";
         //определяем високосный ли год:
         if (!(year % 4) && ((year % 100) || !(year % 400))) {
@@ -161,11 +154,10 @@ var Years = function (year) {
         }
         return this.year + ", " + leapYear + "високосный";
     };
-    Years.valueOf = function () {
+    this.valueOf = function () {
         return this.year;
     };
-    return Years;
-};
+}
 var year = new Years(2017);
 alert(year); // "2017, не високосный"
 // 2017 - year // 0
