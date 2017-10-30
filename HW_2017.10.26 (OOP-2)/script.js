@@ -43,9 +43,9 @@ Car.eight_wheels = function (brand) {
 };
 var car1 = new Car("Honda");
 console.log(car1);
-var car2 = new Car.three_wheels("Hitachi");
+var car2 = Car.three_wheels("Hitachi");
 console.log(car2);
-var car3 = new Car.eight_wheels("Mega-Track");
+var car3 = Car.eight_wheels("Mega-Track");
 console.log(car3);
 
 // Задача №3
@@ -54,7 +54,8 @@ console.log(car3);
 
 var Runner2 = function (name) {
     this.name = name;
-    this.prize = 0;     // медали
+    this.medals = 0;		// завоеванные медали
+    this.prize = 0;     // полученные денежные призы
 };
 var Gamer = function (tickets) {
     this.tickets_bought = tickets;    // количество купленных билетов
@@ -120,17 +121,15 @@ var decorator = function (f) {
                 for (var property in arguments[i]) {
                     if (typeof(arguments[i][property]) === 'number') {
                         firstObjNumber = arguments[i][property];
-                    }
-                    if (firstObjNumber) {
                         break;
                     }
                 }
                 arguments[i] = firstObjNumber;
             }
         }
-        var result = f.apply(this, arguments);
-        return result;
+        return f.apply(this, arguments);
     }
 };
 Math.max = decorator(Math.max);
 Math.max(1, 2, 'abc', {a: 2, b: 4}); // 3;
+Math.max(-1, {a: 0, b: -2});  //
