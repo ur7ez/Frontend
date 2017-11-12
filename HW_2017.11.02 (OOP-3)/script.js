@@ -58,32 +58,24 @@ function Tank(_capacity, _waterFillingRate) {
     };
 
     //при подключении потребителя нужно указывать его скорость потребления воды (л/с)
-    this.toOutput = function (userWaterFillingRate) {
-        if (output1 === null) {
+    this.toOutput = function (userWaterFillingRate, outputNumber) {
+        if (output1 === null && (outputNumber === undefined || outputNumber === 1)) {
             output1 = userWaterFillingRate;
             log_info = 'подключили потребителя к первому входу tank';
-        } else if (output2 === null) {
-            output2 = userWaterFillingRate;
-            log_info = 'подключили потребителя ко второму входу tank';
+        } else {
+            if (output2 === null) {
+                output2 = userWaterFillingRate;
+                log_info = 'подключили потребителя ко второму входу tank';
+            }
         }
     };
     this.fromOutput = function (outputNumber) {
-        if (outputNumber) {
-            if (outputNumber === 1) {
-                output1 = null;
-                log_info = 'отключили потребителя от первого входа tank';
-            } else {
-                output2 = null;
-                log_info = 'отключили потребителя от второго входа tank';
-            }
+        if (output1 && (outputNumber === undefined || outputNumber === 1)) {
+            output1 = null;
+            log_info = 'отключили потребителя от первого входа tank';
         } else {
-            if (output1) {
-                output1 = null;
-                log_info = 'отключили потребителя от первого входа tank';
-            } else {
-                output2 = null;
-                log_info = 'отключили потребителя от второго входа tank';
-            }
+            output2 = null;
+            log_info = 'отключили потребителя от второго входа tank';
         }
     };
 
@@ -120,9 +112,9 @@ function Tank(_capacity, _waterFillingRate) {
 
 var MyTank = new Tank(100, 1);
 MyTank.togglePlumbState();
-MyTank.toOutput(.5);
+MyTank.toOutput(.5, 2);
 MyTank.toOutput(0.25);
-MyTank.togglePlumbState(false);
+MyTank.togglePlumbState();
 MyTank.fromOutput();
 MyTank.fromOutput();
 MyTank.stopInfo();
@@ -134,22 +126,23 @@ MyTank.stopInfo();
 var Runner = function () {
     var medals = {};
     this.forMedals = function () {
-        if (arguments.length > 0) {
-            switch (arguments.length) {
-                case 1:  // возвращаем кол-во медалей переданного в аргументе типа
-                    if (arguments[0] in medals) {
-                        return medals[arguments[0]];
-                    } else {
-                        return 'Медаль "' + arguments[0] + '" не найдена';
-                    }
-                    break;
-                case 2:  // увеличивать количество медалей указанного типа на заданную величину
-                    if (arguments[0] in medals) {
-                        medals[arguments[0]] += arguments[1];
-                    } else {
-                        medals[arguments[0]] = arguments[1];
-                    }
-            }
+        switch (arguments.length) {
+            case 1:  // возвращаем кол-во медалей переданного в аргументе типа
+                if (arguments[0] in medals) {
+                    return medals[arguments[0]];
+                } else {
+                    return 'Медаль "' + arguments[0] + '" не найдена';
+                }
+                break;
+            case 2:  // увеличивать количество медалей указанного типа на заданную величину
+                if (arguments[0] in medals) {
+                    medals[arguments[0]] += arguments[1];
+                } else {
+                    medals[arguments[0]] = arguments[1];
+                }
+                break;
+            case 0:   // ничего не делаем, возвращаем условный false (можно было кинуть исключение с сообщением)
+                return false;
         }
     }
 };
