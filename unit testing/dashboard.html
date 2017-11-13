@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Dashboard</title>
+		<script src="dashboard.js"></script>
+		<style>
+			body {font: 16px/18px Verdana;}
+			section {margin: 10px 0 0;padding: 10px;background: #DDD;}
+			ol {font-family: monospace;}
+		</style>
+	</head>
+	<body>
+		<h1>Dashboard</h1>
+		<section>
+			<h2>[News] Running 400m Results</h2>
+			<ol>
+				<li>Bill - <span class="time">90000</span></li>
+				<li>Alan - <span class="time">90012</span></li>
+				<li>Mike - <span class="time">91004</span></li>
+				<li>Will - <span class="time">91305</span></li>
+				<li>Pete - <span class="time">92456</span></li>
+			</ol>
+			<footer>Delivered: <span class="date">1510138800000</span></footer>
+		</section>
+		<section>
+			<h2>[Message] Important info</h2>
+			<p>For your information: our next lesson will be next Tuesday. Please, don't forget and be in time.</p>
+			<footer>Delivered: <span class="date">1510077900000</span></footer>
+		</section>
+		<section>
+			<h2>[System] Tests added</h2>
+			<p>Testing system added to your dashboard. Enjoy!<br />
+				<img src="test_added.jpg" /></p>
+			<footer>Delivered: <span class="date">1509138000000</span></footer>
+		</section>
+		<script>
+			window.onload = dashboard.init;
+		</script>
+	</body>
+</html>
