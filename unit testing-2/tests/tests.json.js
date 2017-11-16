@@ -49,11 +49,11 @@ var testPack = [
         func: dashboard.formatDateAgo,
         mock: 'Math.round = myMathRound;',
         tests: [
-            [[1510138800000 - (new Date() - 1510799939826)], '1 weeks ago'],
-            [[1510077900000 - (new Date() - 1510799939826)], '1 weeks ago'],
-            [[1438039931201 - (new Date() - 1510799939826)], '120 weeks ago'],
-            [[1248983843682 - (new Date() - 1510799939826)], '433 weeks ago'],
-            [[912398238388 - (new Date() - 1510799939826)], '989 weeks ago']
+            [[1510138800000 + (new Date() - 1510527600000)], '5 days ago'],
+            [[1510077900000 + (new Date() - 1510527600000)], '5 days ago'],
+            [[1438039931201 + (new Date() - 1510527600000)], '120 weeks ago'],
+            [[1248983843682 + (new Date() - 1510527600000)], '432 weeks ago'],
+            [[912398238388 + (new Date() - 1510527600000)], '989 weeks ago']
         ]
     }
 ];
