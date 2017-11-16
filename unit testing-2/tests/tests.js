@@ -15,8 +15,8 @@ for (var i = 0; i < testPack.length; i++) {
                 for (var j = 0; j < curTest.tests.length; j++) {
                     var result = curTest.func.apply(null, curTest.tests[j][0]);
                     var expected = curTest.tests[j][1];
-                    //var randTest = Math.round(0.5 + Math.random() * 4);
-                    var randTest = 1;
+                    var randTest = myMathRound(0.5 + Math.random() * 4);
+                    //var randTest = 1;
                     switch (randTest) {
                         case 1:
                             assert.ok(
