@@ -57,15 +57,12 @@ myDog.bark();
 
 var Chicken = function (name, sex) {
     this.name = name;
-    this.getSex = function () {
-        return sex;
-    };
+    this.sex = sex;
 };
 
 var mChicken = function (name) {
     Chicken.apply(this, [name, 'male']);
 };
-mChicken.prototype = Chicken;
 mChicken.prototype.crow = function () {
     alert("Cock-A-Doodle-Doo!");
 };
