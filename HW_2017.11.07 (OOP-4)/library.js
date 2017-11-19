@@ -47,7 +47,7 @@ String.prototype.intrim = function () {
 
 String.prototype.reverse = function () {
     //переворачивает строку наоборот
-    return str.split('').reverse().join('');
+    return this.split('').reverse().join('');
 };
 
 String.prototype.isPalindrome = function () {
