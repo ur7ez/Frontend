@@ -61,21 +61,29 @@ var Chicken = function (name, sex) {
         return sex;
     };
 };
-myChicken = new Chicken("Tsypa", 'male');
 
-if (myChicken.getSex() === "male") {
-    Chicken.prototype.crow = function () {
-        alert("Cock-A-Doodle-Doo!");
-    };
-} else {
-    Chicken.prototype.produceEgg = function () {
-        var egg = {type: null};
-        return egg;
-    };
-}
+var mChicken = function (name) {
+    Chicken.apply(this, [name, 'male']);
+};
+mChicken.prototype = Chicken;
+mChicken.prototype.crow = function () {
+    alert("Cock-A-Doodle-Doo!");
+};
+
+var fChicken = function (name) {
+    Chicken.apply(this, [name, 'female']);
+};
+fChicken.prototype.produceEgg = function () {
+    var egg = {type: null};
+    return egg;
+};
+
+var myChicken1 = new fChicken("Hen");
+var myChicken2 = new mChicken("Cock");
+
 // проверка:
-if ("crow" in myChicken) {
-    myChicken.crow();
+if ("crow" in myChicken1) {
+    myChicken1.crow();
 } else {
-    myChicken.produceEgg();
+    myChicken1.produceEgg();
 }
