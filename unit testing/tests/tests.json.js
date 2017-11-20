@@ -1,4 +1,5 @@
 var myMathRound = Math.round;
+
 var testPack = [
     {
         name: "lieRound",
@@ -47,13 +48,14 @@ var testPack = [
     {
         name: "formatDateAgo",
         func: dashboard.formatDateAgo,
-        mock: 'Math.round = myMathRound;',
+        mock: 'Math.round = myMathRound; MockDate.set(new Date(1510527600000));',
         tests: [
-            [[1510138800000 + (new Date() - 1510527600000)], '5 days ago'],
-            [[1510077900000 + (new Date() - 1510527600000)], '5 days ago'],
-            [[1438039931201 + (new Date() - 1510527600000)], '120 weeks ago'],
-            [[1248983843682 + (new Date() - 1510527600000)], '432 weeks ago'],
-            [[912398238388 + (new Date() - 1510527600000)], '989 weeks ago']
+            [[1510138800000], '5 days ago'],
+            // instead of this: [[1510138800000 + (new Date() - 1510527600000)], '5 days ago'],
+            [[1510077900000], '5 days ago'],
+            [[1438039931201], '120 weeks ago'],
+            [[1248983843682], '432 weeks ago'],
+            [[912398238388], '989 weeks ago']
         ]
     }
 ];

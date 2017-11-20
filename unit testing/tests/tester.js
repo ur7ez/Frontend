@@ -35,4 +35,5 @@ tester.run = function(testList) {
 			' failed = ' + failed);
 		console.log(failedInfo.join('\n___\n'));
 	}
+    MockDate.reset();
 };
