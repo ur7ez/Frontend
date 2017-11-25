@@ -57,7 +57,9 @@ myDog.bark();
 
 var Chicken = function (name, sex) {
     this.name = name;
-    this.sex = sex;
+    this.getSex = function(){
+        return sex;
+    };
 };
 
 var mChicken = function (name) {
