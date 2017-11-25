@@ -57,9 +57,10 @@ myDog.bark();
 
 var Chicken = function (name, sex) {
     this.name = name;
-    this.getSex = function(){
-        return sex;
-    };
+    this._sex = sex;
+};
+Chicken.prototype.getSex = function () {
+    return this._sex;
 };
 
 var mChicken = function (name) {
@@ -79,8 +80,12 @@ fChicken.prototype.produceEgg = function () {
 
 var myChicken1 = new fChicken("Hen");
 var myChicken2 = new mChicken("Cock");
+var myPet = new Chicken('Puma', 'male');
 
 // проверка:
+console.log('myPet.getSex(): ', myPet.getSex());
+console.log('myChicken1.hasOwnProperty(\'getSex\'): ', myChicken1.hasOwnProperty('getSex'));
+console.log('myPet.hasOwnProperty(\'getSex\'): ', myPet.hasOwnProperty('getSex'));
 if ("crow" in myChicken1) {
     myChicken1.crow();
 } else {
