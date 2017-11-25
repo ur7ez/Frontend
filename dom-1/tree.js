@@ -34,11 +34,14 @@ function showLevel(lvl) {
     if (!lvl) {
         return '';
     }
+    return Array(lvl+1).join('-');
+    /*
     if ('repeat' in String.prototype) {
         return '-'.repeat(lvl);
     }
     var s = [].fill.call({length: lvl}, '-');
-    return [].join.call(s, '') + ' ';    //Array(3).fill('-').join('');
+    return [].join.call(s, '') + ' ';
+    */
 }
 
 function logDOM(anyElement) {
