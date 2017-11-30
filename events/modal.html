@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Задача №2 (Браузерные события)</title>
+    <style>
+        body {
+            background: #d3d3d32b
+        }
+
+        .proto {
+            width: 200px;
+            height: 150px;
+            border-width: 3px;
+            border-color: rgba(22, 22, 22, 0.87) rgba(33, 33, 33, 0.47) #bebebe rgba(33, 33, 33, 0.47);
+            border-style: ridge;
+            background-color: white;
+            position: absolute;
+            display: block;
+        }
+
+        .showOff {
+            display: none  !important;
+        }
+
+        .header {
+            margin: 0;
+            color: white;
+            font-weight: 700;
+            width: 100%;
+            background-color: blue;
+            cursor: move;
+        }
+
+        .close {
+            background-color: red;
+            color: white;
+            float: right;
+            width: 18px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .message {
+            margin: 5px 0 0 0;
+        }
+    </style>
+</head>
+<body>
+<div class="showOff proto">
+    <p class="header">Attention<span class="close" title="close window">X</span></p>
+    <p class="message">You have pressed: '<b></b>'</p>
+</div>
+<script type="text/javascript" src="modal.js"></script>
+</body>
+</html>
