@@ -1,0 +1,35 @@
+body {
+    font-size: 20px;
+    font-family: Helvetica, Arial, sans-serif;
+    background: #f5f5f5;
+    color: #666;
+}
+
+h2, h3 {
+    border-bottom: 1px solid;
+}
+
+.search {
+    width: 200px;
+    background-color: #38d7ce;
+    transition: 1s all ease;
+    border-color: white;
+}
+
+.list {
+    list-style: none;
+    width: 200px;
+    margin: -2px 0 0 0;
+    padding: 0;
+    border: 1px solid darkgrey;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.list li:hover {
+    background: white;
+}
+
+.results {
+    background: #fff;
+}

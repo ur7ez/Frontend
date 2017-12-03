@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Основы AJAX и COMET. Задача №2</title>
+    <script src="scriptRequest.js"></script>
+    <style>
+        body {
+            font-size: 20px;
+            font-family: Helvetica, Arial, sans-serif;
+            background: #f5f5f5;
+            color: #666;
+        }
+
+        div.scroll {
+            background: #fff;
+            height: 300px;
+            border: 1px solid green;
+            margin: 3px;
+        }
+    </style>
+</head>
+<body>
+<!--
+Клиентская часть. Пустая страница scroll.html со скриптом. При загрузке страницы скрипт аяксом с days.php подгружает необходимое количество элементов. Высота элемента - 300px, необходимое количество - это количество элементов, позволяющее заполнить страницу полностью по высоте + 1 элемент (для появления вертикального скролла). Элемент - это блок div, содержащий свой порядковый номер и названия дня недели на английском. При скролле страницы до самого низа подгружается еще 5 элементов. Транспорт AJAX-запросов - JSONP
+
+Серверная часть. Файл days.php принимает запросы с двумя параметрами - limit (количество возвращаемых элементов) и from (с какой позиции генерировать элементы). Возвращает порядковый номер и день недели на английском.
+-->
+<script>
+
+    function updateInfo() {
+        if ((window.pageYOffset || document.documentElement.scrollTop) + window.innerHeight < document.documentElement.scrollHeight) {
+            return;
+        }
+        elemsCount = document.querySelectorAll('div.scroll').length;
+        var url = 'days.php?from=' + (elemsCount + 1) + '&limit=5';
+        scriptRequest(url, ok, fail);
+    }
+
+    function ok(data) {
+//        console.log('Данные загружены: ' + JSON.stringify(data));
+        if (data === '' || !(data)) {
+            return;
+        }
+        var results = data;
+        for (var props in results) {
+            var newElem = document.createElement("div");
+            newElem.className = 'scroll';
+            newElem.innerHTML = props + '. ' + results[props];
+            document.body.appendChild(newElem);
+        }
+        document.body.removeChild(document.querySelector('script.tmp'));
+    }
+
+    function fail(url) {
+        console.error('Ошибка при запросе на: ' + url);
+    }
+
+    var elemsCount = Math.ceil(document.documentElement.clientHeight / 300);
+
+    scriptRequest('days.php?from=1' + '&limit=' + elemsCount, ok, fail);
+    window.addEventListener('scroll', updateInfo);
+
+</script>
+</body>
+</html>
