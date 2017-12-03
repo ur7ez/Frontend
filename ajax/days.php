@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['limit']) && isset($_GET
     $limit = ($limit < 1) ? 1 : $limit;
     $k = $from;
     $resCnt = count($data);
-    $from = ($from > $resCnt) ? $from % $resCnt || 1 : $from;
+    $from = ($from > $resCnt) ? max($from % $resCnt, 1) : $from;
 
     $res = [];
     for ($i = $from - 1; $i < $from + $limit - 1; $i++) {
