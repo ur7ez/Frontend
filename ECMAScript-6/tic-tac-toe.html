@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="tic-tac-toe.js"></script>
+    <title>Игра "крестики-нолики"</title>
+    <style>
+        header {
+            color: #808080;
+        }
+
+        h2 {
+            color: #008800;
+        }
+        .row {
+            width: 70px;
+            height: 70px;
+            background-color: #CDDC39;
+            float: left;
+            margin: 2px;
+            cursor: pointer;
+        }
+
+        .sub {
+            clear: both;
+            margin: 0 auto;
+            width: fit-content;
+        }
+
+        .game {
+            width: 300px;
+            /*width: fit-content;*/
+        }
+
+        .options {
+            width: 300px;
+            margin: 10px 1px 10px;
+            border: 1px solid lightgray;
+            padding: 10px;
+        }
+
+        input {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h2>Игра "крестики-нолики"</h2>
+    <span><strong>Режим:</strong> игра против компьютера</span>
+</header>
+<div class="options">
+    <b>Уровень "интеллекта" компьютера:</b><br>
+    <input type="radio" name="smart" id="random_pass" value="1" checked>
+    <label for="random_pass">случайный ход</label><br>
+    <input type="radio" name="smart" id="smart_pass" value="2">
+    <label for="smart_pass">ход, максимизирующий шансы на победу</label>
+</div>
+<div class="game">
+    <div class="sub">
+        <div class="row"></div>
+        <div class="row"></div>
+        <div class="row"></div>
+    </div>
+    <div class="sub">
+        <div class="row"></div>
+        <div class="row"></div>
+        <div class="row"></div>
+    </div>
+    <div class="sub">
+        <div class="row"></div>
+        <div class="row"></div>
+        <div class="row"></div>
+    </div>
+</div>
+</body>
+</html>
