@@ -15,6 +15,8 @@ $data = [
     'Saturday',
     'Sunday',
 ];
+$resCnt = count($data);
+
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['limit']) && isset($_GET['from'])) {
 // принимает запросы с двумя параметрами: limit (количество возвращаемых элементов) и
 // from (с какой позиции генерировать элементы).
@@ -25,7 +27,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['limit']) && isset($_GET
     $from = ($from < 1) ? 1 : $from;
     $limit = ($limit < 1) ? 1 : $limit;
     $k = $from;
-    $resCnt = count($data);
     $from = ($from > $resCnt) ? $from % $resCnt : $from;
     if (!$from) $from = 7;
 

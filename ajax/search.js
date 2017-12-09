@@ -31,22 +31,19 @@ function search(e) {
             if (request.status !== 200) {
                 console.error(request.status + ': ' + request.statusText);
             } else {
-//                    console.log('responseText: ' + request.responseText);
-                var hints = request.responseText.split(';');
+                console.log('request.responseText: ', request.responseText)
+                var hints = JSON.parse(request.responseText);
+                if (!hints.length) return;
+
+                // deleting current hint list:
                 var existingElems = document.querySelectorAll('.list li');
-                for (var i = 0; i < hints.length; i++) {
-                    if (existingElems[i]) {
-                        existingElems[i].innerText = hints[i];
-                    } else {
-                        var newElem = document.createElement("li");
-                        newElem.innerText = hints[i];
-                        document.querySelector('.list').appendChild(newElem);
-                    }
+                for (i = 0; i < existingElems.length; i++) {
+                    existingElems[i].parentNode.removeChild(existingElems[i]);
                 }
-                if (existingElems.length > hints.length) {
-                    for (i = existingElems.length; i > hints.length; i--) {
-                        existingElems[i - 1].parentNode.removeChild(existingElems[i - 1]);
-                    }
+                for (var i = 0; i < hints.length; i++) {
+                    var newElem = document.createElement("li");
+                    newElem.innerText = hints[i];
+                    document.querySelector('.list').appendChild(newElem);
                 }
             }
         }
@@ -77,34 +74,21 @@ function loadInfo(e) {
                 if (request.status !== 200) {
                     console.error(request.status + ': ' + request.statusText);
                 } else {
-//                        console.log('responseText: ' + request.responseText);
-                    if (request.responseText === '' || !(request.responseText)) {
-                        existingElems = document.querySelectorAll('.results *');
-                        for (i = 0; i < existingElems.length; i++) {
-                            existingElems[i].parentNode.removeChild(existingElems[i]);
-                        }
-                        return;
+                    // deleting current description paragraphs:
+                    var existingElems = document.querySelectorAll('.results *');
+                    for (i = 0; i < existingElems.length; i++) {
+                        existingElems[i].parentNode.removeChild(existingElems[i]);
                     }
+                    // parse and render loaded data
                     var results = JSON.parse(request.responseText);
                     for (var i = 0; i < results.length; i++) {
-                        if (document.querySelectorAll('.results h3')[i]) {
-                            document.querySelectorAll('.results h3')[i].innerHTML = results[i].header;
-                            document.querySelectorAll('.results p')[i].innerHTML = results[i].description;
-                        } else {
-                            var newElem = document.createElement("h3");
-                            newElem.innerHTML = results[i].header;
-                            document.querySelector('.results').appendChild(newElem);
+                        var newElem = document.createElement("h3");
+                        newElem.innerHTML = results[i].header;
+                        document.querySelector('.results').appendChild(newElem);
 
-                            newElem = document.createElement("p");
-                            newElem.innerHTML = results[i].description;
-                            document.querySelector('.results').appendChild(newElem);
-                        }
-                    }
-                    var existingElems = document.querySelectorAll('.results h3, .results p');
-                    if (existingElems.length > results.length * 2) {
-                        for (i = results.length * 2; i < existingElems.length; i++) {
-                            existingElems[i].parentNode.removeChild(existingElems[i]);
-                        }
+                        newElem = document.createElement("p");
+                        newElem.innerHTML = results[i].description;
+                        document.querySelector('.results').appendChild(newElem);
                     }
                 }
             }

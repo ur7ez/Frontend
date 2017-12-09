@@ -42,7 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['q']) && $_GET['q'] !== 
     });
     asort($hint);
     header("Access-Control-Allow-Origin: *");
-    echo implode($hint, ';');
+    header('Content-type: application/json; charset=utf-8');
+    echo json_encode(array_values($hint));
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['search']) && $_POST['search'] !== '') {
     // шлем результат выбора - заголовок (содержит подсказку) и описание (имеет >=2 вхождения подсказки
@@ -56,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['search']) && $_POST['
         echo '';
         die();
     }
-    $result = json_encode(array_values($res));   //to ensure we have an array output in JSON, not pbject
+    $result = json_encode(array_values($res));   //to ensure we have an array output in JSON, not an Object
     header("Access-Control-Allow-Origin: *");
     header('Content-type: application/json; charset=utf-8');
     echo $result;
