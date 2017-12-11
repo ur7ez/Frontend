@@ -48,7 +48,7 @@ function compPick() {
             id = startingPoint[randomInteger(0, startingPoint.length - 1)];
         } else {
             if (useLogger) console.clear();
-            id = (leftArr.length === 1) ? leftArr[0] : heuristic(figureComp);
+            id = (leftArr.length === 1) ? leftArr[0] : heuristic(ticArr, leftArr, figureComp);
         }
     }
 
@@ -83,24 +83,31 @@ function logger() {
  *                                    | Q(k') = (k' + 2)!, k' ∈ N
  * где W - длина выигрышной комбинации
  *
+ * @param field - текущее состояние игрового поля
+ * @param emptyCells - не занятые клетки поля (срез)
  * @param figure - фигура текущего игрока
  */
-function heuristic(figure) {
+function heuristic(field, emptyCells, figure) {
     let curMap;
-    let curEmpty = leftArr.slice();   //собственная копия массива незанятых клеток
+    let curEmpty = emptyCells.slice();   //собственная копия массива незанятых клеток
     // перемешаем массив пустых клеток для разнообразия ходов
     curEmpty.sort((a, b) => {
         return Math.random() - 0.5;
     });
-    let _scoresArr = [];   // вспомагательный массив оценок F(m) для каждого пустого поля из среза leftArr
+    let _scoresArr = [];   // вспомагательный массив оценок F(m) для каждого пустого поля из среза emptyCells
     let maxScore = 0;
     let resultId = curEmpty[0];
 
     for (let i = 0; i < curEmpty.length; i++) {
-        curMap = copy(ticArr);   //снимок текущего состояния игрового поля
+        curMap = copy(field);   //снимок текущего состояния игрового поля
         ticArrUpdate(curEmpty[i], figure, curMap);
 
         let move = [curEmpty[i][0] - 1, curEmpty[i][1] - 1];
+
+        if (magicLine(move, figure, curMap)) {
+            return curEmpty[i];
+        }
+
         logger('/------------------------------------------------------/');
         logger('Шаг №' + i + '. Анализ координаты: ' + move[0] + ':' + move[1]);
         logger('Игровое поле field: ', curMap);
@@ -126,9 +133,6 @@ function heuristic(figure) {
  * @param field - анализируемое (виртуальное) состояние поля игры с учетом предполагаемого хода
  */
 function score(position, player, field) {
-    if (magicLine(position, player, field)) {
-        return Number.MAX_VALUE;
-    }
     let res = 0;
     let lines = [
         [0, -1], /** Строка */
