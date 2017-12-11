@@ -2,23 +2,50 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <script src="tic-tac-toe.js"></script>
     <title>Игра "крестики-нолики"</title>
     <style>
-        header {
+        body {
+            background: #f8f8f8 url(img/bg.jpg) repeat top left;
+            max-width: 600px;
+            min-width: 500px;
+        }
+
+        section {
             color: #808080;
         }
 
         h2 {
             color: #008800;
         }
-        .row {
-            width: 70px;
-            height: 70px;
-            background-color: #CDDC39;
-            float: left;
-            margin: 2px;
-            cursor: pointer;
+
+        progress {
+            margin: 12px auto;
+            display: flow-root;
+            width: 40%;
+        }
+
+        .hint {
+            visibility: hidden;
+            left: 15%;
+            display: inline-table;
+            position: relative;
+            color: darkred;
+            transition: color 1s ease-out 0.5s;
+        }
+
+        .hint:hover {
+            color: #008800;
+        }
+
+        .game {
+            /*width: 300px;*/
+            /*float: left;*/
+            padding-left: 30px;
+            margin: 10px 1px 10px;
+            display: table-cell;
+            vertical-align: middle;
+            height: 262px;
+            font-family: 'Open Sans', sans-serif;
         }
 
         .sub {
@@ -27,51 +54,173 @@
             width: fit-content;
         }
 
-        .game {
-            width: 300px;
-            /*width: fit-content;*/
+        .row {
+            width: 70px;
+            height: 70px;
+            background-color: #CDDC39;
+            float: left;
+            margin: 2px;
+            text-align: center;
+            font-size: 3em;
+            border: 2px solid palevioletred;
+            cursor: pointer;
+            transition: font-size 100ms ease-out 0.2s;
+        }
+
+        .row:hover {
+            font-size: 4em;
+        }
+
+        .row span {
+            vertical-align: middle;
+            font-weight: 700;
+        }
+
+        .setup {
+            float: left;
         }
 
         .options {
-            width: 300px;
+            width: 200px;
             margin: 10px 1px 10px;
             border: 1px solid lightgray;
             padding: 10px;
         }
 
+        .options input {
+            outline: none;
+            margin-left: 15px;
+        }
+
+        .options input:checked + label {
+            text-decoration: underline;
+            color: brown;
+        }
+
+        div.options :first-child {
+            color: blue;
+            display: block;
+        }
+
         input {
             cursor: pointer;
+        }
+
+        .play {
+            text-align: center;
+        }
+
+        #playBtn {
+            border: 0;
+            height: 35px;
+            font-weight: 700;
+            outline: none;
+            cursor: pointer;
+            background-color: #3bb3e0;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 14px;
+            text-decoration: none;
+            color: #008800;
+            position: relative;
+            padding: 10px 50px 10px 20px;
+            background-image: linear-gradient(bottom, rgb(44, 160, 202) 0%, rgb(62, 184, 229) 100%);
+            border-radius: 5px;
+            box-shadow: inset 0 1px 0 #2ab7ec, 0 5px 0 0 #156785, 0 10px 5px #999;
+        }
+
+        #playBtn:active {
+            top: 3px;
+            background-image: linear-gradient(bottom, rgb(62, 184, 229) 0%, rgb(44, 160, 202) 100%);
+            box-shadow: inset 0 1px 0 #2ab7ec, 0 2px 0 0 #156785, 0 5px 3px #999;
+        }
+
+        #playBtn::before {
+            background-color: #2591b4;
+            background-image: url(img/right_arrow.png);
+            background-repeat: no-repeat;
+            background-position: center center;
+            content: "";
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            margin-top: -9px;
+            border-radius: 50%;
+            box-shadow: inset 0 1px 0 #052756, 0 1px 0 #60c9f0;
+        }
+
+        #playBtn:active::before {
+            top: 50%;
+            margin-top: -12px;
+            box-shadow: inset 0 1px 0 #60c9f0, 0 3px 0 #0e3871, 0 6px 3px #1a80a6;
+        }
+
+        .winnerInfo {
+            background-color: #88ff89;
+            color: #0f2d31;
+            font-weight: 700;
+            margin: 0 auto;
+            width: 300px;
+            text-align: center;
+            padding: 7px;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            margin-left: -65px;
         }
     </style>
 </head>
 <body>
 <header>
     <h2>Игра "крестики-нолики"</h2>
-    <span><strong>Режим:</strong> игра против компьютера</span>
 </header>
-<div class="options">
-    <b>Уровень "интеллекта" компьютера:</b><br>
-    <input type="radio" name="smart" id="random_pass" value="1" checked>
-    <label for="random_pass">случайный ход</label><br>
-    <input type="radio" name="smart" id="smart_pass" value="2">
-    <label for="smart_pass">ход, максимизирующий шансы на победу</label>
-</div>
-<div class="game">
-    <div class="sub">
-        <div class="row"></div>
-        <div class="row"></div>
-        <div class="row"></div>
+<section>
+    <span><strong>Режим:</strong> играть против компьютера</span>
+    <div class="hint"><b>=></b> Ваш ход !</div>
+</section>
+<div class="setup">
+    <div class="options">
+        <span><b>Уровень "интеллекта" компьютера:</b></span><br>
+        <input type="radio" name="smart" id="random_pass" value="random" checked>
+        <label for="random_pass">случайный ход</label><br>
+        <input type="radio" name="smart" id="smart_pass" value="smart">
+        <label for="smart_pass">ход, максимизирующий шансы на победу</label>
     </div>
-    <div class="sub">
-        <div class="row"></div>
-        <div class="row"></div>
-        <div class="row"></div>
-    </div>
-    <div class="sub">
-        <div class="row"></div>
-        <div class="row"></div>
-        <div class="row"></div>
+    <div class="options figures">
+        <span><b>Игрок играет:</b></span><br>
+        <input type="radio" name="figure" id="cross" value="X" checked>
+        <label for="cross">крестиком</label><br>
+        <input type="radio" name="figure" id="zero" value="О">
+        <label for="zero">ноликом</label>
     </div>
 </div>
+<div class="game" id="game">
+    <div class="sub">
+        <div class="row" id="cell_11"><span></span></div>
+        <div class="row" id="cell_12"><span></span></div>
+        <div class="row" id="cell_13"><span></span></div>
+    </div>
+    <div class="sub">
+        <div class="row" id="cell_21"><span></span></div>
+        <div class="row" id="cell_22"><span></span></div>
+        <div class="row" id="cell_23"><span></span></div>
+    </div>
+    <div class="sub">
+        <div class="row" id="cell_31"><span></span></div>
+        <div class="row" id="cell_32"><span></span></div>
+        <div class="row" id="cell_33"><span></span></div>
+    </div>
+</div>
+<progress value="0" max="9"></progress>
+<div class="play">
+    <button id="playBtn" tabindex="1" autofocus>Играть !</button>
+</div>
+<footer>(&copy) Mike Nykytenko</footer>
+<script src="tic-tac-toe.js"></script>
+<script src="score.js"></script>
 </body>
 </html>
