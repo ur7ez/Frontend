@@ -27,13 +27,15 @@
 Серверная часть. Файл days.php принимает запросы с двумя параметрами - limit (количество возвращаемых элементов) и from (с какой позиции генерировать элементы). Возвращает порядковый номер и день недели на английском.
 -->
 <script>
+var requestComplete = true;  // при низкой скорости интернета событие "долистали до конца" может успеть сработать несколько раз до того, как прийдут данные. Добавил проверку отработки предыдущего вызова обработчика
 
     function updateInfo() {
-        if ((window.pageYOffset || document.documentElement.scrollTop) + window.innerHeight < document.documentElement.scrollHeight) {
+        if ((window.pageYOffset || document.documentElement.scrollTop) + window.innerHeight < document.documentElement.scrollHeight || !requestComplete) {
             return;
         }
         elemsCount = document.querySelectorAll('div.scroll').length;
         var url = 'days.php?from=' + (elemsCount + 1) + '&limit=5';
+        requestComplete = false;
         scriptRequest(url, ok, fail);
     }
 
@@ -50,10 +52,12 @@
             document.body.appendChild(newElem);
         }
         document.body.removeChild(document.querySelector('script.tmp'));
+        requestComplete = true;
     }
 
     function fail(url) {
         console.error('Ошибка при запросе на: ' + url);
+        requestComplete = true;
     }
 
     var elemsCount = Math.ceil(document.documentElement.clientHeight / 300);
