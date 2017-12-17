@@ -23,42 +23,7 @@ body {
     display: block;
     padding: 10px;
     line-height: 1.4em;
-}
-
-/* --------------------------- widget component style here --------------------------- */
-
-.widget {
-    /*margin: 10px 0;*/
-    width: 170px;
-    border-radius: 12px;
-    height: 100px;
-    text-align: center;
-}
-
-#wgCityHead {
-    font-family: Arial, Serif, SansSerif;
-    /*font-weight: bold;*/
-    font-size: 18px;
-    text-align: center;
-    white-space: nowrap;
-    color: #FFF;
-    padding: 5px 0 7px 0;
-}
-
-.wgImg {
-    display: inline-block;
-    position: relative;
-    bottom: 5px;
-}
-
-.wgTemp {
-    display: inline-block;
-    color: #FFF;
-    font-family: Arial, Serif, SansSerif;
-    font-size: 26px;
-    vertical-align: top;
-    width: 86px;
-    padding-top: 18px;
+    width: 550px;
 }
 
 /*-------------------------- get widget button --------------------------*/

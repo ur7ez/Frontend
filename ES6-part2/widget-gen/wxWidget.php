@@ -17,9 +17,7 @@ $rCache = new InfoCache('wxWidget_' . $q . '_' . $lang);
 
 //пробуем получить данные из кэша
 try {
-    header("Access-Control-Allow-Origin: *");
-    header('Content-type: application/json; charset=utf-8');
-
+//    header("Access-Control-Allow-Origin: *");
     if (FALSE === ($data = $rCache->get())) {
         //если данные в кэше устарели, пытаемся получить их от сервера
         $data = @file_get_contents(
@@ -31,14 +29,13 @@ try {
             $data = $rCache->get(TRUE);
         } else {
             $data = json_decode($data, true);
-            $data['url'] = trim($_SERVER['SCRIPT_NAME'], __FILE__);
             $data = json_encode($data);
             //обновляем данные в кэше, предварительно изменяем кодировку на UTF-8
             $rCache->save(iconv('windows-1251', 'utf-8', $data));
         }
     }
     if (FALSE !== $data) {
-
+        header('Content-type: application/json; charset=utf-8');
         die($data);
     }
 } catch (Exception $e) {

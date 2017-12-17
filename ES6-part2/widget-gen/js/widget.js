@@ -34,7 +34,7 @@ let getWxData = (event) => {
     wgLng = document.querySelector('#lang').value;
 
     // Проверяем был ли уже аналогичный запрос (куки хранится в течение последних 10 минут)
-    let cached = Cookies.get('wxWidget&' + wgCity + '&' + wgLng);
+    let cached = Cookies.get(cookiePrefix + '&' + wgCity + '&' + wgLng);
     if (cached) {
         wgJSON = JSON.parse(cached);
         document.querySelector('#wg-json').innerText = doWidget();
@@ -54,7 +54,7 @@ let getWxData = (event) => {
 
         // Кэшируем результаты погоды на клиенте на 10 минут
         // wgJSON['url'] = wgURL;
-        Cookies.set('wxWidget&' + wgCity + '&' + wgLng, JSON.stringify(wgJSON), 1 / (24 * 6), location.href);
+        Cookies.set(cookiePrefix + '&' + wgCity + '&' + wgLng, JSON.stringify(wgJSON), 1 / (24 * 6), location.href);
         // заполняем темплейт виджета
         document.querySelector('#wg-json').innerText = doWidget();
         console.log('result is from API-request');
@@ -77,7 +77,8 @@ let doWidget = () => {
     document.querySelector('.widget').style.display = '';
     document.querySelector('#wgCityHead span').innerText = wgCity_local;
     let wgElem = document.querySelector('#wx-widget-image');
-    wgElem.setAttribute('src', 'wx_condx/' + wxCondx["icon"].match(/(.+\/64x64\/)(.+)/)[2]);
+    // wgElem.setAttribute('src', 'wx_condx/' + wxCondx["icon"].match(/(.+\/64x64\/)(.+)/)[2]);
+    wgElem.setAttribute('src', wxCondx["icon"]);
     wgElem.setAttribute('alt', 'current weather for ' + wgCity);
     wgElem.setAttribute('title', wxCondx["text"] + ' (' + wgCity_local + ')');
     document.querySelector('#wgTemp').firstChild.textContent = wgTemp;
@@ -95,5 +96,6 @@ function toColor(strColor) {
 }
 
 let wgJSON, wgCity, wgLng;
+let cookiePrefix = 'wxWidget';
 let hostingURL = 'https://ur7ez.000webhostapp.com/widget-gen';
 document.querySelector('.widgetBtn').addEventListener('click', getWxData);
