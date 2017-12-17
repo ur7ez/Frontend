@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Генератор виджетов</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<!--
+Задача №2
+
+Написать генератор виджетов. При входе на страничку на сайте пользователь имеет возможность выбрать город (в selecte три города: Днепр, Киев и Львов) и стиль виджета (три произвольные цветовые гаммы). Пользователю возвращается код для вставки на его страницу, при вставке кода на его месте отображается виджет текущей погоды в выбранном городе и с выбранным стилем.
+
+Погоду получать ajax-запросом с сайта https://www.apixu.com (нужно получить бесплатный API-ключ после регистрации), завернутым в промис. Кэшировать результаты погоды на клиенте на 10 минут, используя куки.
+-->
+<div><label for="city"><b>Выберите город: </b></label>
+    <select name="City" id="city" title="Город, для которого нужно получить сведения о текущей погоде">
+        <option value="Dnepropetrovsk">Днепр</option>
+        <option value="Kiev">Киев</option>
+        <option value="Lviv">Львов</option>
+    </select>
+    <label for="lang"><b>Язык: </b></label>
+    <select name="Lang" id="lang" title="Язык для описания погодных условий">
+        <option value="uk">Ukrainian</option>
+        <option value="ru" selected>Russian</option>
+        <option value="en">English</option>
+    </select>
+</div>
+<div>
+    <span><b>Стиль виджета:</b></span><br>
+    <table class="gamma">
+        <tbody>
+        <tr>
+            <td bgcolor="5455ff">
+                <input type="radio" id="color1" name="color" value="5455ff" checked>
+                <label for="color1">Deep blue</label>
+            </td>
+            <td bgcolor="00ff00">
+                <input type="radio" id="color2" name="color" value="00ff00">
+                <label for="color2">Lime</label>
+            </td>
+            <td bgcolor="D2691E">
+                <input type="radio" id="color3" name="color" value="D2691E">
+                <label for="color3">Orange</label>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="widgetBtn" title="Получить виджет с текущей погодой">
+    <div class="cont"><span class="center">Получить виджет</span></div>
+</div>
+
+<div>
+    <p><i>Код для вставки в HTML-страницу:</i></p>
+    <code class="widget_code" id="wg-json">
+        Код для вставки на страницу
+    </code>
+</div>
+<p>Виджет выглядит так:</p>
+<div class="widget" id="wx-widget" style="display: none">
+    <div id="wgCityHead">
+        <span></span>
+    </div>
+    <div class="wgImg">
+        <img id="wx-widget-image" src="">
+    </div>
+    <div class="wgTemp">
+        <nobr>
+            <span id="wgTemp"><span class="tsp">&nbsp;</span>°C</span>
+        </nobr>
+    </div>
+</div>
+
+<script src="js/widget.js" type="module"></script>
+</body>
+</html>

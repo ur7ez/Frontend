@@ -1,0 +1,102 @@
+body {
+    /*background-color: lightcyan;*/
+}
+
+#city {
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.gamma {
+    border-spacing: 7px;
+}
+
+.gamma td {
+    padding: 5px;
+}
+
+.widget_code {
+    word-wrap: break-word;
+    font-family: Menlo, "Lucida Sans Typewriter", monospace;
+    background: #272822;
+    color: #F8F8F2;
+    display: block;
+    padding: 10px;
+    line-height: 1.4em;
+}
+
+/* --------------------------- widget component style here --------------------------- */
+
+.widget {
+    /*margin: 10px 0;*/
+    width: 170px;
+    border-radius: 12px;
+    height: 100px;
+    text-align: center;
+}
+
+#wgCityHead {
+    font-family: Arial, Serif, SansSerif;
+    /*font-weight: bold;*/
+    font-size: 18px;
+    text-align: center;
+    white-space: nowrap;
+    color: #FFF;
+    padding: 5px 0 7px 0;
+}
+
+.wgImg {
+    display: inline-block;
+    position: relative;
+    bottom: 5px;
+}
+
+.wgTemp {
+    display: inline-block;
+    color: #FFF;
+    font-family: Arial, Serif, SansSerif;
+    font-size: 26px;
+    vertical-align: top;
+    width: 86px;
+    padding-top: 18px;
+}
+
+/*-------------------------- get widget button --------------------------*/
+
+.widgetBtn {
+    background: none;
+    background-position: 0 0;
+    border: none;
+    color: #ffffff;
+    display: inline-block;
+    white-space: nowrap;
+    zoom: 1;
+    padding: 0;
+    height: 30px;
+    cursor: pointer;
+    text-decoration: none;
+    margin-top: 0;
+}
+
+.widgetBtn div.cont {
+    background: url(../img/button-solid.png) repeat-x #506ee1;
+    background-position: -1px 0;
+    color: #ffffff;
+    /*float: left;*/
+    display: inline-block;
+    zoom: 1;
+    height: 30px;
+    text-decoration: none;
+    border-radius: 15px;
+}
+
+.widgetBtn span.center {
+    position: relative;
+    line-height: 1em;
+    display: inline-block;
+    zoom: 1;
+    color: #ffffff;
+    text-decoration: none;
+    margin: 5px;
+    padding: 0 9px;
+}

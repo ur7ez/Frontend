@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Игра "крестики-нолики"</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header>
+    <h2>Игра "крестики-нолики"</h2>
+</header>
+<section>
+    <span><strong>Режим:</strong> играть против компьютера</span>
+    <div class="hint"><b>=></b> Ваш ход !</div>
+</section>
+<div class="setup">
+    <div class="options">
+        <span><b>Уровень "интеллекта" компьютера:</b></span><br>
+        <input type="radio" name="smart" id="random_pass" value="random" checked>
+        <label for="random_pass">случайный ход</label><br>
+        <input type="radio" name="smart" id="smart_pass" value="smart">
+        <label for="smart_pass">ход, максимизирующий шансы на победу</label>
+    </div>
+    <div class="options figures">
+        <span><b>Игрок играет:</b></span><br>
+        <input type="radio" name="figure" id="cross" value="X" checked>
+        <label for="cross">крестиком</label><br>
+        <input type="radio" name="figure" id="zero" value="О">
+        <label for="zero">ноликом</label>
+    </div>
+</div>
+<div class="game" id="game">
+    <div class="sub">
+        <div class="row" id="cell_11"><span></span></div>
+        <div class="row" id="cell_12"><span></span></div>
+        <div class="row" id="cell_13"><span></span></div>
+    </div>
+    <div class="sub">
+        <div class="row" id="cell_21"><span></span></div>
+        <div class="row" id="cell_22"><span></span></div>
+        <div class="row" id="cell_23"><span></span></div>
+    </div>
+    <div class="sub">
+        <div class="row" id="cell_31"><span></span></div>
+        <div class="row" id="cell_32"><span></span></div>
+        <div class="row" id="cell_33"><span></span></div>
+    </div>
+</div>
+<div class="winnerInfo">Общий счет: (И) <span id="userScore">0</span> : <span id="compScore">0</span> (К)</div>
+<progress value="0" max="9"></progress>
+<div class="play">
+    <button id="playBtn" tabindex="1" autofocus>Играть !</button>
+</div>
+<footer>(&copy) Mike Nykytenko</footer>
+
+<script type="module" src="tic-tac-toe.js"></script>
+</body>
+</html>

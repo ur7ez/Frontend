@@ -1,0 +1,174 @@
+body {
+    background: #f8f8f8 url(../img/bg.jpg) repeat top left;
+    max-width: 600px;
+    min-width: 500px;
+}
+
+section {
+    color: #808080;
+}
+
+h2 {
+    color: #008800;
+}
+
+progress {
+    margin: 12px auto;
+    display: flow-root;
+    width: 40%;
+}
+
+.hint {
+    visibility: hidden;
+    left: 15%;
+    display: inline-table;
+    position: relative;
+    color: darkred;
+    transition: color 1s ease-out 0.5s;
+}
+
+.hint:hover {
+    color: #008800;
+}
+
+.game {
+    width: 300px;
+    float: left;
+    padding-left: 30px;
+    margin: 10px 1px 10px;
+    display: table-cell;
+    vertical-align: middle;
+    height: 262px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.sub {
+    clear: both;
+    margin: 0 auto;
+    width: fit-content;
+}
+
+.row {
+    width: 70px;
+    height: 70px;
+    background-color: #CDDC39;
+    float: left;
+    margin: 2px;
+    text-align: center;
+    font-size: 3em;
+    border: 2px solid palevioletred;
+    cursor: pointer;
+    transition: font-size 100ms ease-out 0.2s;
+}
+
+.row:hover {
+    font-size: 4em;
+}
+
+.row span {
+    vertical-align: middle;
+    font-weight: 700;
+}
+
+.setup {
+    float: left;
+}
+
+.options {
+    width: 200px;
+    margin: 10px 1px 10px;
+    border: 1px solid lightgray;
+    padding: 10px;
+}
+
+.options input {
+    outline: none;
+    margin-left: 15px;
+}
+
+.options input:checked + label {
+    text-decoration: underline;
+    color: brown;
+}
+
+div.options :first-child {
+    color: blue;
+    display: block;
+}
+
+input {
+    cursor: pointer;
+}
+
+.play {
+    text-align: center;
+}
+
+#playBtn {
+    border: 0;
+    height: 35px;
+    font-weight: 700;
+    outline: none;
+    cursor: pointer;
+    background-color: #3bb3e0;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+    color: #008800;
+    position: relative;
+    padding: 10px 50px 10px 20px;
+    background-image: linear-gradient(bottom, rgb(44, 160, 202) 0%, rgb(62, 184, 229) 100%);
+    border-radius: 5px;
+    box-shadow: inset 0 1px 0 #2ab7ec, 0 5px 0 0 #156785, 0 10px 5px #999;
+}
+
+#playBtn:active {
+    top: 3px;
+    background-image: linear-gradient(bottom, rgb(62, 184, 229) 0%, rgb(44, 160, 202) 100%);
+    box-shadow: inset 0 1px 0 #2ab7ec, 0 2px 0 0 #156785, 0 5px 3px #999;
+}
+
+#playBtn::before {
+    background-color: #2591b4;
+    background-image: url(../img/right_arrow.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    content: "";
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    margin-top: -9px;
+    border-radius: 50%;
+    box-shadow: inset 0 1px 0 #052756, 0 1px 0 #60c9f0;
+}
+
+#playBtn:active::before {
+    top: 50%;
+    margin-top: -12px;
+    box-shadow: inset 0 1px 0 #60c9f0, 0 3px 0 #0e3871, 0 6px 3px #1a80a6;
+}
+
+.winnerInfo {
+    background-color: #88ff89;
+    color: #0f2d31;
+    font-weight: 700;
+    margin: 0 auto;
+    width: 300px;
+    text-align: center;
+    padding: 7px;
+    display: table-cell;
+}
+
+#winnerInfo {
+    border-left: 10px solid white;
+    background-color: #CDDC39;
+}
+
+footer {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    margin-left: -65px;
+}
