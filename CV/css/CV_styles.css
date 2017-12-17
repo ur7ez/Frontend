@@ -1,0 +1,190 @@
+@import "normalize.css";
+/* --- GENERAL ELEMENTS --- */
+body {
+    font-size: 100%;
+    /*font-size: 1.3vw;*/
+    font-family: Arial, 'Times New Roman', Times, serif, sans-serif, cursive, fantasy;
+    font-weight: 400;
+    background-color: #f1f1f1;
+}
+
+article {
+    margin: 2px 2px;
+    padding-left: 15px;
+    /*line-height: 1.5em;*/
+}
+
+article p {
+    padding-left: 17px;
+}
+
+dl {
+    padding-left: 2.3em;
+}
+
+dl dt {
+    font-style: italic;
+    /*font-size: 85%;*/
+}
+
+dl dd {
+    /*font-size: .9em;*/
+    color: #9d9d9d;
+}
+
+.container {
+    margin: 0 auto;
+    padding: 5px 15px;
+}
+
+.container h2 {
+    line-height: .8em;
+}
+
+.job-title {
+    line-height: 1.5em;
+    padding-bottom: 5px;
+}
+
+.period {
+    margin: 2px;
+}
+
+.period::before {
+    content: "\27A4" " ";
+    color: darkorange;
+}
+
+.term {
+    color: rgba(84, 84, 84, 0.62);
+}
+
+.company {
+    margin: 6px;
+    padding-left: 15px;
+    color: cadetblue;
+}
+
+p.description {
+    padding-left: 3em;
+    font-size: 0.9em;
+    font-style: italic;
+}
+
+/* NAVIGATION */
+.page-nav {
+    margin-right: 1px;
+    border-color: #101010;
+    width: 18%;
+    /*min-width: 160px;*/
+    position: fixed;
+    height: 92%;
+    background-color: azure;
+}
+
+.page-nav ul, ul {
+    margin: 5px;
+    padding: 2px 5px;
+}
+
+.page-nav ul li, ul li {
+    margin: 5px;
+    list-style-type: none;
+}
+
+.page-nav li a:hover {
+    color: yellowgreen;
+    transition: 500ms;
+    text-shadow: 0 0 10px #fff, 0 0 10px #686cff, 0 0 10px #fff;
+    -webkit-transform: rotate(7deg);
+    transform: rotate(7deg);
+}
+
+.page-nav a {
+    display: inline-block;
+    text-decoration: none;
+    color: #9d9d9d;
+    line-height: 1.7em;
+    font-weight: bold;
+    text-align: left;
+}
+
+/* HEADER */
+.contacts {
+    padding: 1em 0 0 3em;
+    line-height: 1.35em;
+}
+
+.contacts table tr td:first-child {
+    text-align: right;
+    padding-right: 20px;
+}
+
+.cv_foto img {
+    border-radius: 10%;
+    width: 150px;
+    margin-left: 20px;
+    margin-right: 20px;
+    float: right;
+    margin-top: 30px;
+}
+
+.appcicant_name {
+    font-size: 24px;
+    color: darkorange;
+}
+
+.header {
+    margin-top: 2px;
+    padding: 1px 0;
+    overflow: auto;
+    width: 85%;
+    /*background-color: rgba(224, 221, 146, 0.89);*/
+}
+
+*, :after, :before {
+    box-sizing: inherit;
+}
+
+/* MAIN PART */
+.body {
+    position: relative;
+    float: right;
+    width: 82%;
+}
+
+.sections {
+    overflow: auto;
+}
+
+.sections h1::first-letter, .sections h2::first-letter {
+    color: grey;
+}
+
+.sections h2:first-line {
+    color: #1419af;
+}
+
+/* FOOTER */
+.footer {
+    width: 100%;
+    display: flow-root;
+    text-align: center;
+    font-style: italic;
+    color: #a6af37;
+    border-top: solid;
+    border-width: 1px;
+    padding: 0;
+}
+
+/* Media */
+@media print {
+    .body {
+        width: 100%;
+    }
+
+    .noprint {
+        /*transform: scale(0);*/
+        display: none;
+    }
+}
