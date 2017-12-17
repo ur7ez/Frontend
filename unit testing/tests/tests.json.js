@@ -49,6 +49,7 @@ var testPack = [
         name: "formatDateAgo",
         func: dashboard.formatDateAgo,
         mock: 'Math.round = myMathRound; MockDate.set(new Date(1510527600000));',
+        // mock: 'Math.round = myMathRound; Date = function () { this.valueOf = function() { return 1510527600000;} };'
         tests: [
             [[1510138800000], '5 days ago'],
             // instead of this: [[1510138800000 + (new Date() - 1510527600000)], '5 days ago'],
