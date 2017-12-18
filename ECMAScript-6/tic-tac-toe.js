@@ -15,7 +15,7 @@ let passType;
 let useLogger = false;
 const rowIdPrefix = 'cell_';
 
-function userPick(event) {
+let userPick = (event) => {
     if (!started) return;
     let curElem = event.target;
     if (curElem.getAttribute('class') === 'row' && !curElem.firstChild.innerText) {
@@ -29,9 +29,9 @@ function userPick(event) {
         progresUpdate();
         if (!isGameOver(id, figureUser)) compPick();
     }
-}
+};
 
-function compPick() {
+let compPick = () => {
     started = false;
     let id, curElem;
     if (passType === 'random') { // случайный ход компьютера
@@ -62,13 +62,15 @@ function compPick() {
 
     started = true;
     isGameOver(id, figureComp);
-}
+};
 
 /** ------------------------------------------------------------------------------------------ */
 
-function logger() {
-    if (useLogger) console.log(...arguments);
-}
+let logger = (arg, styles = [100, 'inherit', 'inherit']) => {
+    if (useLogger) {
+        console.log('%c' + arg, `font-weight:${styles[0]};color:${styles[1]};background:${styles[2]}`)
+    }
+};
 
 /** Эвристическая оценка состояния игрового поля (по идее http://www.dokwork.ru/2012/11/tictactoe.html):
  * анализируем ход в каждой из оставшихся пустых клеток поля с помощью функции оценки хода
@@ -87,7 +89,7 @@ function logger() {
  * @param emptyCells - не занятые клетки поля (срез)
  * @param figure - фигура текущего игрока
  */
-function heuristic(field, emptyCells, figure) {
+let heuristic = (field, emptyCells, figure) => {
     let curMap;
     let curEmpty = emptyCells.slice();   //собственная копия массива незанятых клеток
     // перемешаем массив пустых клеток для разнообразия ходов
@@ -108,11 +110,10 @@ function heuristic(field, emptyCells, figure) {
             return curEmpty[i];
         }
 
-        logger('/------------------------------------------------------/');
-        logger('Шаг №' + i + '. Анализ координаты: ' + move[0] + ':' + move[1]);
-        logger('Игровое поле field: ', curMap);
+        logger(`Шаг № ${i}. Анализ координаты: ${move[0]}:${move[1]}`, [700, 'blue', 'yellow']);
+        logger(`Игровое поле field: ${JSON.stringify(curMap)}`);
         let curScore = score(move, figure, curMap);
-        logger('Текущая интегральная оценка F(m): ' + curScore);
+        logger(`Текущая интегральная оценка F(m): ${curScore}`, [700, 'pink', 'white']);
         _scoresArr[i] = [curEmpty[i], curScore];
 
         if (curScore === Number.MAX_VALUE) {
@@ -124,7 +125,7 @@ function heuristic(field, emptyCells, figure) {
         }
     }
     return resultId;
-}
+};
 
 /**
  * Оценка полезности хода по 4-м направлениям (результат функции F(m))
@@ -132,7 +133,7 @@ function heuristic(field, emptyCells, figure) {
  * @param player - фигура игрока
  * @param field - анализируемое (виртуальное) состояние поля игры с учетом предполагаемого хода
  */
-function score(position, player, field) {
+let score = (position, player, field) => {
     let res = 0;
     let lines = [
         [0, -1], /** Строка */
@@ -145,7 +146,7 @@ function score(position, player, field) {
     /* Оценка длины ряда для игрока */
     for (let line in lines) {
         _score = FieldScanner.scoreLine(lines[line], field, winLength, position, player);
-        logger('Объект оценок для игрока (' + linesD[line] + '): ', _score);
+        logger(`Объект оценок для игрока (${linesD[line]}): ${JSON.stringify(_score)}`);
         if (_score.investigated < winLength) {
             continue;
         }
@@ -155,32 +156,28 @@ function score(position, player, field) {
         }
         res += G(_score.inrow) + _score.count;
     }
-    logger('Оценка для игрока G(k):', res);
+    logger(`Оценка для игрока G(k): ${res}`);
     /* Оценка длины ряда для противника */
     player = (player === figureComp) ? figureUser : figureComp;
     for (let line in lines) {
         _score = FieldScanner.scoreLine(lines[line], field, winLength, position, player);
-        logger('Объект оценок для противника (' + linesD[line] + '): ', _score);
+        logger(`Объект оценок для противника (${linesD[line]}): ${JSON.stringify(_score)}`);
         if (_score.investigated < winLength) {
             continue;
         }
         res += Q(_score.inrow) + _score.count;
     }
     return res;
-}
+};
 
 /** Оценка пользы от хода для игрока */
-function G(k) {
-    return f(k + 2);
-}
+let G = (k) => f(k + 2);
 
 /** Оценка степени вредительства противнику */
-function Q(k) {
-    return f(k + 2);
-}
+let Q = (k) => f(k + 2);
 
 /** Факториал k */
-function f(k) {
+let f = (k) => {
     if (k < 0) {
         throw new Error('Illegal argument passed: ' + k);
     }
@@ -189,25 +186,21 @@ function f(k) {
     } else {
         return k * f(k - 1);
     }
-}
+};
 
 /** ------------------------------------------------------------------------------------------ */
 
-function randomInteger(min, max) {
-    return Math.round(Math.abs(min - 0.5 + Math.random() * (max - min + 1)));
-}
+let randomInteger = (min, max) => Math.round(Math.abs(min - 0.5 + Math.random() * (max - min + 1)));
 
-function copy(jsonLikeObject) {
-    return JSON.parse(JSON.stringify(jsonLikeObject));
-}
+let copy = (jsonLikeObject) => JSON.parse(JSON.stringify(jsonLikeObject));
 
-function isEmpty(object) {
-    return ('length' in object) ? (object.join('') === "") : (JSON.stringify(object) === "{}");
-}
+let isEmpty = (object) => ('length' in object) ? (object.join('') === "") : (JSON.stringify(object) === "{}");
 
-function progresUpdate(min = 9 - leftArr.length) {
-    document.querySelector('progress').value = min;
-}
+let progresUpdate = (min = 9 - leftArr.length) => {
+    let progress = document.querySelector('progress');
+    progress.value = (progress.value === (progress.max - 1)) ? progress.max : min;
+    progress.innerHTML = ((progress.value / 9 * 100).toFixed(1)) + '%';
+};
 
 /**
  * Обновляет массив текущего состояния клеток на поле. Если передается "подставной" массив,
@@ -216,16 +209,16 @@ function progresUpdate(min = 9 - leftArr.length) {
  * @param figure    - фигура игрока, сделавшего ход
  * @param gameMap   - массив для обновления состояния поля после хода игрока (накопительно)
  */
-function ticArrUpdate(pos, figure, gameMap = ticArr) {
+let ticArrUpdate = (pos, figure, gameMap = ticArr) => {
     gameMap[pos[0] - 1][pos[1] - 1] = figure;
-}
+};
 
 /**
  * Обновляет наличие пустых клеток на поле.
  * @param emptyMap   - массив координат пустых клеток
  * @param gameMap   - массив состояния поля после хода игрока, по-умолчанию используется основной массив игры
  */
-function leftArrUpdate(emptyMap = leftArr, gameMap = ticArr) {
+let leftArrUpdate = (emptyMap = leftArr, gameMap = ticArr) => {
     if (emptyMap.length === 1) {
         emptyMap.splice(0, Number.MAX_VALUE);
     } else {
@@ -240,9 +233,9 @@ function leftArrUpdate(emptyMap = leftArr, gameMap = ticArr) {
             }
         }
     }
-}
+};
 
-function figureSelect(event) {
+let figureSelect = (event) => {
     let curElem = event.target;
     if (curElem.tagName === 'INPUT') {
         if (figureUser !== curElem.getAttribute('value')) {
@@ -250,9 +243,9 @@ function figureSelect(event) {
             figureUser = curElem.getAttribute('value');
         }
     }
-}
+};
 
-function isGameOver(pos, symb) {
+let isGameOver = (pos, symb) => {
     let winner = magicLine(pos, symb);
     if (leftArr[0] === undefined || winner) {    // Game is Over !
         // обновляем статус победителя в новом или ранее созданном DIV-элементе
@@ -267,9 +260,9 @@ function isGameOver(pos, symb) {
     }
     if (figureComp === symb) document.querySelector('.hint').style.visibility = 'visible';
     return false;
-}
+};
 
-function updateWinner(winLine, symb) {
+let updateWinner = (winLine, symb) => {
     let winnerStatus = 'Ничья !';
     if (winLine) {
         markWonLine(winLine);
@@ -283,17 +276,14 @@ function updateWinner(winLine, symb) {
         let statusDiv = document.createElement('div');
         statusDiv.innerText = winnerStatus;
         statusDiv.setAttribute('class', 'winnerInfo');
-        document.body.insertBefore(statusDiv, document.querySelector('progress'));
+        document.body.insertBefore(statusDiv, document.querySelector('.progress'));
     }
-}
+};
 
-function btnGame(event) {
-    toggleGame(event.target);
-}
+let btnGame = (event) => toggleGame(event.target);
 
-function toggleGame(domElement) {
+let toggleGame = (domElement) => {
     let scope = document.querySelectorAll('input');
-    progresUpdate(0);
 
     if (started) { // игра завершена
         for (let i = 0; i < scope.length; i++) {
@@ -308,6 +298,7 @@ function toggleGame(domElement) {
         for (let i = 0; i < scope.length; i++) {
             scope[i].setAttribute('disabled', 'disabled');
         }
+        progresUpdate(0);
         // clear battle field:
         scope = document.querySelectorAll('.row');
         for (let i = 0; i < scope.length; i++) {
@@ -330,7 +321,7 @@ function toggleGame(domElement) {
         }
         started = true;
     }
-}
+};
 
 /**
  * Ищет выигрышную комбинацию в снимке игрового поля (текущем или "подставном").
@@ -340,7 +331,7 @@ function toggleGame(domElement) {
  * @return array || boolean
  * Возвращает координаты выиграшной линии, или false - если такой нет в текущем снимке игрового поля.
  */
-function magicLine(pos, symb, arr = ticArr) {
+let magicLine = (pos, symb, arr = ticArr) => {
     let wonLine = [, [], []];
     /** Проверяем диагонали */
     let toright = true, toleft = true;
@@ -373,9 +364,9 @@ function magicLine(pos, symb, arr = ticArr) {
         }
     }
     return false;
-}
+};
 
-function markWonLine(markArr) {
+let markWonLine = (markArr) => {
     // markArr - массив вида [wonId, [coord1], [coord2]], где
     // wonId - ссылка на выиграшную позицию в массиве (из двух)
     // coord1, coord2 - координаты ячеек в линии для левой/правой диагоналий или столбца / строки,
@@ -384,7 +375,7 @@ function markWonLine(markArr) {
         let curElem = document.querySelector('#' + rowIdPrefix + markArr[wonId][i]);
         curElem.style.backgroundColor = 'purple';
     }
-}
+};
 
 document.querySelector('.game').addEventListener('click', userPick);
 document.querySelector('.figures').addEventListener('click', figureSelect);

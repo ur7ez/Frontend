@@ -18,10 +18,11 @@
             color: #008800;
         }
 
-        progress {
-            margin: 12px auto;
-            display: flow-root;
-            width: 40%;
+        .progress {
+            margin: 10px auto;
+            text-align: center;
+            font-weight: 700;
+            color: blue;
         }
 
         .hint {
@@ -180,7 +181,7 @@
 </header>
 <section>
     <span><strong>Режим:</strong> играть против компьютера</span>
-    <div class="hint"><b>=></b> Ваш ход !</div>
+    <div class="hint"><b>=></b>Ваш ход !</div>
 </section>
 <div class="setup">
     <div class="options">
@@ -215,7 +216,9 @@
         <div class="row" id="cell_33"><span></span></div>
     </div>
 </div>
-<progress value="0" max="9"></progress>
+<div class="progress">Прогресс ходов текущей партии:
+    <progress value="0" max="9"></progress>
+</div>
 <div class="play">
     <button id="playBtn" tabindex="1" autofocus>Играть !</button>
 </div>
