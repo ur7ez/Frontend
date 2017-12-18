@@ -35,7 +35,7 @@ let passType;
 export let useLogger = false;
 const rowIdPrefix = 'cell_';
 
-function userPick(event) {
+let userPick = (event) => {
     if (!started) return;
     let curElem = event.target;
     if (curElem.getAttribute('class') === 'row' && !curElem.firstChild.innerText) {
@@ -44,9 +44,9 @@ function userPick(event) {
         passDraw(curElem, id, gamer.user, 'blue');
         if (!isGameOver(id, gamer.user)) compPick();
     }
-}
+};
 
-function compPick() {
+let compPick = () => {
     started = false;
     let id, curElem, promise;
 
@@ -95,28 +95,26 @@ function compPick() {
             console.error(error);
         }
     );
-}
+};
 
-function passDraw(elem, id, symb, color) {
+let passDraw = (elem, id, symb, color) => {
     elem.firstChild.innerText = symb;
     elem.firstChild.style.color = color;
     ticArrUpdate(id, symb);
     leftArrUpdate();
     progresUpdate();
-}
+};
 
 
-function randomInteger(min, max) {
-    return Math.round(Math.abs(min - 0.5 + Math.random() * (max - min + 1)));
-}
+let randomInteger = (min, max) => Math.round(Math.abs(min - 0.5 + Math.random() * (max - min + 1)));
 
-function isEmpty(object) {
-    return ('length' in object) ? (object.join('') === "") : (JSON.stringify(object) === "{}");
-}
+let isEmpty = (object) => ('length' in object) ? (object.join('') === "") : (JSON.stringify(object) === "{}");
 
-function progresUpdate(min = 9 - leftArr.length) {
-    document.querySelector('progress').value = min;
-}
+let progresUpdate = (min = 9 - leftArr.length) => {
+    let progress = document.querySelector('progress');
+    progress.value = (progress.value === (progress.max - 1)) ? progress.max : min;
+    progress.innerHTML = 'Прогресс ходов текущей партии: ' + ((progress.value / 9 * 100).toFixed(1)) + '%';
+};
 
 /**
  * Обновляет массив текущего состояния клеток на поле. Если передается "подставной" массив,
@@ -125,16 +123,16 @@ function progresUpdate(min = 9 - leftArr.length) {
  * @param figure    - фигура игрока, сделавшего ход
  * @param gameMap   - массив для обновления состояния поля после хода игрока (накопительно)
  */
-export function ticArrUpdate(pos, figure, gameMap = ticArr) {
+export let ticArrUpdate = (pos, figure, gameMap = ticArr) => {
     gameMap[pos[0] - 1][pos[1] - 1] = figure;
-}
+};
 
 /**
  * Обновляет наличие пустых клеток на поле.
  * @param emptyMap   - массив координат пустых клеток
  * @param gameMap   - массив состояния поля после хода игрока, по-умолчанию используется основной массив игры
  */
-function leftArrUpdate(emptyMap = leftArr, gameMap = ticArr) {
+let leftArrUpdate = (emptyMap = leftArr, gameMap = ticArr) => {
     if (emptyMap.length === 1) {
         emptyMap.splice(0, Number.MAX_VALUE);
     } else {
@@ -149,9 +147,9 @@ function leftArrUpdate(emptyMap = leftArr, gameMap = ticArr) {
             }
         }
     }
-}
+};
 
-function isGameOver(pos, symb) {
+let isGameOver = (pos, symb) => {
     let winner = magicLine(pos, symb);
     if (leftArr[0] === undefined || winner) {    // Game is Over !
         // обновляем статус победителя в новом или ранее созданном DIV-элементе
@@ -165,9 +163,9 @@ function isGameOver(pos, symb) {
     }
     if (gamer.comp === symb) document.querySelector('.hint').style.visibility = 'visible';
     return false;
-}
+};
 
-function updateWinner(winLine, symb) {
+let updateWinner = (winLine, symb) => {
     let winnerStatus = 'Ничья !';
     if (winLine) {
         markWonLine(winLine);
@@ -192,17 +190,14 @@ function updateWinner(winLine, symb) {
         statusDiv.innerText = winnerStatus;
         statusDiv.setAttribute('class', 'winnerInfo');
         statusDiv.setAttribute('id', 'winnerInfo');
-        document.body.insertBefore(statusDiv, document.querySelector('progress'));
+        document.body.insertBefore(statusDiv, document.querySelector('.progress'));
     }
-}
+};
 
-function btnGame(event) {
-    toggleGame(event.target);
-}
+let btnGame = (event) => toggleGame(event.target);
 
-function toggleGame(domElement) {
+let toggleGame = (domElement) => {
     let scope = document.querySelectorAll('input');
-    progresUpdate(0);
 
     if (started) { // игра завершена
         for (let i = 0; i < scope.length; i++) {
@@ -217,6 +212,7 @@ function toggleGame(domElement) {
         for (let i = 0; i < scope.length; i++) {
             scope[i].setAttribute('disabled', 'disabled');
         }
+        progresUpdate(0);
         // clear battle field:
         scope = document.querySelectorAll('.row');
         for (let i = 0; i < scope.length; i++) {
@@ -243,7 +239,7 @@ function toggleGame(domElement) {
         }
         started = true;
     }
-}
+};
 
 /**
  * Ищет выигрышную комбинацию в снимке игрового поля (текущем или "подставном").
@@ -253,7 +249,7 @@ function toggleGame(domElement) {
  * @return array || boolean
  * Возвращает координаты выиграшной линии, или false - если такой нет в текущем снимке игрового поля.
  */
-export function magicLine(pos, symb, arr = ticArr) {
+export let magicLine = (pos, symb, arr = ticArr) => {
     let wonLine = [, [], []];
     /** Проверяем диагонали */
     let toright = true, toleft = true;
@@ -286,9 +282,9 @@ export function magicLine(pos, symb, arr = ticArr) {
         }
     }
     return false;
-}
+};
 
-function markWonLine(markArr) {
+let markWonLine = (markArr) => {
     // markArr - массив вида [wonId, [coord1], [coord2]], где
     // wonId - ссылка на выиграшную позицию в массиве (из двух)
     // coord1, coord2 - координаты ячеек в линии для левой/правой диагоналий или столбца / строки,
@@ -297,7 +293,7 @@ function markWonLine(markArr) {
         let curElem = document.querySelector('#' + rowIdPrefix + markArr[wonId][i]);
         curElem.style.backgroundColor = 'purple';
     }
-}
+};
 
 document.querySelector('.game').addEventListener('click', userPick);
 document.querySelector('#playBtn').addEventListener('click', btnGame);

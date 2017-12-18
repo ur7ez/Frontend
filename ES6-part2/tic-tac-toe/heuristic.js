@@ -1,5 +1,5 @@
 "use strict";
-import {magicLine, ticArrUpdate, gamer, useLogger} from './tic-tac-toe.js';
+import {gamer, magicLine, ticArrUpdate, useLogger} from './tic-tac-toe.js';
 
 class Score {
     constructor(investigated, count, inrow) {
@@ -103,7 +103,7 @@ class FieldScanner {
  * @param emptyCells - не занятые клетки поля (срез)
  * @param figure - фигура текущего игрока
  */
-export function heuristic(field, emptyCells, figure) {
+export let heuristic = (field, emptyCells, figure) => {
     let curMap;
     let curEmpty = emptyCells.slice();   //собственная копия массива незанятых клеток
     // перемешиваем массив пустых клеток для разнообразия ходов
@@ -125,11 +125,11 @@ export function heuristic(field, emptyCells, figure) {
             return curEmpty[i];
         }
 
-        logger('/------------------------------------------------------/');
-        logger('Шаг №' + i + '. Анализ координаты: ' + move[0] + ':' + move[1]);
-        logger('Игровое поле field: ', curMap);
+        // logger('/------------------------------------------------------/');
+        logger(`Шаг № ${i}. Анализ координаты: ${move[0] + 1}:${move[1] + 1}`, [700, 'blue', 'yellow']);
+        logger(`Игровое поле field: ${JSON.stringify(curMap)}`);
         let curScore = score(move, figure, curMap);
-        logger('Текущая интегральная оценка F(m): ' + curScore);
+        logger(`Текущая интегральная оценка F(m): ${curScore}`, [700, 'pink', 'white']);
         _scoresArr[i] = [curEmpty[i], curScore];
 
         if (curScore === Number.MAX_VALUE) {
@@ -141,7 +141,7 @@ export function heuristic(field, emptyCells, figure) {
         }
     }
     return resultId;
-}
+};
 
 /** ------------------------------------------------------------------------------------------ */
 
@@ -151,7 +151,7 @@ export function heuristic(field, emptyCells, figure) {
  * @param player - фигура игрока
  * @param field - анализируемое (виртуальное) состояние поля игры с учетом предполагаемого хода
  */
-function score(position, player, field) {
+let score = (position, player, field) => {
     let res = 0;
     let winLength = field.length;
     let lines = [
@@ -165,7 +165,7 @@ function score(position, player, field) {
     /* Оценка длины ряда для игрока */
     for (let line in lines) {
         _score = FieldScanner.scoreLine(lines[line], field, winLength, position, player);
-        logger('Объект оценок для игрока (' + linesD[line] + '): ', _score);
+        logger(`Объект оценок для игрока (${linesD[line]}): ${JSON.stringify(_score)}`);
         if (_score.investigated < winLength) {
             continue;
         }
@@ -175,32 +175,28 @@ function score(position, player, field) {
         }
         res += G(_score.inrow) + _score.count;
     }
-    logger('Оценка для игрока G(k):', res);
+    logger(`Оценка для игрока G(k): ${res}`);
     /* Оценка длины ряда для противника */
     player = (player === gamer.comp) ? gamer.user : gamer.comp;
     for (let line in lines) {
         _score = FieldScanner.scoreLine(lines[line], field, winLength, position, player);
-        logger('Объект оценок для противника (' + linesD[line] + '): ', _score);
+        logger(`Объект оценок для противника (${linesD[line]}): ${JSON.stringify(_score)}`);
         if (_score.investigated < winLength) {
             continue;
         }
         res += Q(_score.inrow) + _score.count;
     }
     return res;
-}
+};
 
 /** Оценка пользы от хода для игрока */
-function G(k) {
-    return f(k + 2);
-}
+let G = (k) => f(k + 2);
 
 /** Оценка степени вредительства противнику */
-function Q(k) {
-    return f(k + 2);
-}
+let Q = (k) => f(k + 2);
 
 /** Факториал k */
-function f(k) {
+let f = (k) => {
     if (k < 0) {
         throw new Error('Illegal argument passed: ' + k);
     }
@@ -209,12 +205,12 @@ function f(k) {
     } else {
         return k * f(k - 1);
     }
-}
+};
 
-function copy(jsonLikeObject) {
-    return JSON.parse(JSON.stringify(jsonLikeObject));
-}
+let copy = (jsonLikeObject) => JSON.parse(JSON.stringify(jsonLikeObject));
 
-export function logger() {
-    if (useLogger) console.log(...arguments);
-}
+export let logger = (arg, styles = [100, 'inherit', 'inherit']) => {
+    if (useLogger) {
+        console.log('%c' + arg, `font-weight:${styles[0]};color:${styles[1]};background:${styles[2]}`)
+    }
+};

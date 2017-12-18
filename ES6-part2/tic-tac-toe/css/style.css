@@ -12,10 +12,11 @@ h2 {
     color: #008800;
 }
 
-progress {
-    margin: 12px auto;
-    display: flow-root;
-    width: 40%;
+.progress {
+    margin: 10px auto;
+    text-align: center;
+    font-weight: 700;
+    color: blue;
 }
 
 .hint {
@@ -162,7 +163,7 @@ input {
 }
 
 #winnerInfo {
-    border-left: 10px solid white;
+    border-left: 10px solid #f8f8f8;
     background-color: #CDDC39;
 }
 
