@@ -1,5 +1,4 @@
 "use strict";
-import {gamer, magicLine, ticArrUpdate, useLogger} from './tic-tac-toe.js';
 
 class Score {
     constructor(investigated, count, inrow) {
@@ -101,10 +100,11 @@ class FieldScanner {
  *
  * @param field - текущее состояние игрового поля
  * @param emptyCells - не занятые клетки поля (срез)
- * @param figure - фигура текущего игрока
+ * @param figure - объект параметров игроков
  */
 export let heuristic = (field, emptyCells, figure) => {
     let curMap;
+    let curPlayer = figure.current;
     let curEmpty = emptyCells.slice();   //собственная копия массива незанятых клеток
     // перемешиваем массив пустых клеток для разнообразия ходов
     curEmpty.sort((a, b) => {
@@ -114,14 +114,15 @@ export let heuristic = (field, emptyCells, figure) => {
     let _scoresArr = [];   // вспомагательный массив оценок F(m) для каждого пустого поля из среза emptyCells
     let maxScore = 0;
     let resultId = curEmpty[0];
+    console.clear();
 
     for (let i = 0; i < curEmpty.length; i++) {
         curMap = copy(field);   //снимок текущего состояния игрового поля
-        ticArrUpdate(curEmpty[i], figure, curMap);
+        ticArrUpdate(curEmpty[i], curPlayer, curMap);
 
         let move = [curEmpty[i][0] - 1, curEmpty[i][1] - 1];
 
-        if (magicLine(move, figure, curMap)) {
+        if (magicLine(move, curPlayer, curMap)) {
             return curEmpty[i];
         }
 
@@ -148,7 +149,7 @@ export let heuristic = (field, emptyCells, figure) => {
 /**
  * Оценка полезности хода по 4-м направлениям (результат функции F(m))
  * @param position - координаты предполагаемого хода
- * @param player - фигура игрока
+ * @param player - объект параметров игроков
  * @param field - анализируемое (виртуальное) состояние поля игры с учетом предполагаемого хода
  */
 let score = (position, player, field) => {
@@ -164,7 +165,7 @@ let score = (position, player, field) => {
     let _score;
     /* Оценка длины ряда для игрока */
     for (let line in lines) {
-        _score = FieldScanner.scoreLine(lines[line], field, winLength, position, player);
+        _score = FieldScanner.scoreLine(lines[line], field, winLength, position, player.current);
         logger(`Объект оценок для игрока (${linesD[line]}): ${JSON.stringify(_score)}`);
         if (_score.investigated < winLength) {
             continue;
@@ -177,9 +178,9 @@ let score = (position, player, field) => {
     }
     logger(`Оценка для игрока G(k): ${res}`);
     /* Оценка длины ряда для противника */
-    player = (player === gamer.comp) ? gamer.user : gamer.comp;
+    let player2 = (player.current === player.comp) ? player.user : player.comp;
     for (let line in lines) {
-        _score = FieldScanner.scoreLine(lines[line], field, winLength, position, player);
+        _score = FieldScanner.scoreLine(lines[line], field, winLength, position, player2);
         logger(`Объект оценок для противника (${linesD[line]}): ${JSON.stringify(_score)}`);
         if (_score.investigated < winLength) {
             continue;
@@ -198,7 +199,7 @@ let Q = (k) => f(k + 2);
 /** Факториал k */
 let f = (k) => {
     if (k < 0) {
-        throw new Error('Illegal argument passed: ' + k);
+        throw new Error(`Illegal argument passed: ${k}`);
     }
     if (k === 1) {
         return k;
@@ -207,10 +208,64 @@ let f = (k) => {
     }
 };
 
+/**
+ * Ищет выигрышную комбинацию в снимке игрового поля (текущем или "подставном").
+ * @param pos   - координата последнего хода игрока. Пока не использую
+ * @param symb  - фигура игрока ('X' или 'O')
+ * @param arr   - массив состояния игрового поля, как правило - основной массив игры ticArr
+ * @return array || boolean
+ * Возвращает координаты выиграшной линии, или false - если такой нет в текущем снимке игрового поля.
+ */
+export let magicLine = (pos, symb, arr) => {
+    let wonLine = [, [], []];
+    /** Проверяем диагонали */
+    let toright = true, toleft = true, len = arr.length;
+    for (let i = 0; i < len; i++) {
+        toright &= (arr[i][i] === symb);
+        toleft &= (arr[len - i - 1][i] === symb);
+        wonLine[1][i] = `${i + 1}${i + 1}`;
+        wonLine[2][i] = `${len - i}${i + 1}`;
+    }
+    if (toright || toleft) {
+        wonLine[0] = (toright) ? 1 : 2;
+        return wonLine;
+    }
+    /** Проверяем горизонтальные и вертикальные линии */
+    let cols, rows;
+    for (let col = 0; col < len; col++) {
+        cols = rows = true;
+        for (let row = 0; row < len; row++) {
+            rows &= (arr[col][row] === symb);
+            cols &= (arr[row][col] === symb);
+            wonLine[1][row] = `${col + 1}${row + 1}`;
+            wonLine[2][row] = `${row + 1}${col + 1}`;
+        }
+        // Это условие после каждой проверки колонки и столбца
+        // позволяет остановить дальнейшее выполнение, без проверки
+        // всех остальных столбцов и строк.
+        if (cols || rows) {
+            wonLine[0] = (cols) ? 2 : 1;
+            return wonLine;
+        }
+    }
+    return false;
+};
+
+/**
+ * Обновляет массив текущего состояния клеток на поле. Если передается "подставной" массив,
+ * нужно позаботится о приведении его к состоянию основного массива игры (ticArr)
+ * @param pos   - координаты позиции игрока
+ * @param figure    - фигура игрока, сделавшего ход
+ * @param gameMap   - массив для обновления состояния поля после хода игрока (накопительно)
+ */
+export let ticArrUpdate = (pos, figure, gameMap) => {
+    gameMap[pos[0] - 1][pos[1] - 1] = figure;
+};
+
 let copy = (jsonLikeObject) => JSON.parse(JSON.stringify(jsonLikeObject));
 
-export let logger = (arg, styles = [100, 'inherit', 'inherit']) => {
+let logger = (arg, styles = [100, 'inherit', 'inherit'], useLogger = false) => {
     if (useLogger) {
-        console.log('%c' + arg, `font-weight:${styles[0]};color:${styles[1]};background:${styles[2]}`)
+        console.log(`%c${arg}`, `font-weight:${styles[0]};color:${styles[1]};background:${styles[2]}`);
     }
 };
