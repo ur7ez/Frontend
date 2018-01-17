@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Angular. Homework 16.Jan.2018</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
+    <style>
+        html {
+            font-family: sans-serif;
+        }
+
+        div:first-of-type {
+            align-items: flex-start;
+            margin-bottom: 5px;
+        }
+
+        label {
+            margin-right: 15px;
+            line-height: 32px;
+        }
+
+        input {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #999;
+            transition: 0.2s all linear;
+            outline: none;
+            margin-right: 5px;
+            position: relative;
+            top: 2px;
+        }
+
+        input:checked {
+            border: 6px solid black;
+        }
+
+        legend {
+            color: white;
+            background-color: black;
+            padding: 5px 10px;
+            border-radius: 0;
+            border: 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body ng-app>
+<!--
+Создать страницу на который будет список ФИО с Radio Button. При выборе ФИО будет выводится текст: Добро пожаловать, ФИО!
+-->
+<fieldset>
+    <legend>Выберите Ф.И.О.:</legend>
+    <br>
+    <div ng-init="surname='Иванов Иван Иванович'">
+        <input type="radio" name="fio" ng-model="surname" value="Иванов Иван Иванович" id="fio1">
+        <label for="fio1">Иванов Иван Иванович</label><br>
+        <input type="radio" ng-model="surname" name="fio" value="Петров Петр Петрович" id="fio2">
+        <label for="fio2">Петров Петр Петрович</label><br>
+        <input type="radio" ng-model="surname" name="fio" value="Никитенко Михаил Александрович" id="fio3">
+        <label for="fio3">Никитенко Михаил Александрович</label><br>
+        <input type="radio" ng-model="surname" name="fio" value="Сиряк Сергей Владимирович" id="fio4">
+        <label for="fio4">Сиряк Сергей Владимирович</label><br>
+        <input type="radio" ng-model="surname" name="fio" value="Горбачева Светлана Сергеевна" id="fio5">
+        <label for="fio5">Горбачева Светлана Сергеевна</label>
+    </div>
+</fieldset>
+<hr>
+<h3 style="color: #8BC34A;">Добро пожаловать, {{surname}}!</h3>
+</body>
+</html>
