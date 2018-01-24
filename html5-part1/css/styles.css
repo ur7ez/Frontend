@@ -1,0 +1,336 @@
+@import "nav.css";
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Cantarell", "Open Sans", "Helvetica Neue", "Ubuntu", sans-serif;
+    font-size: 14px;
+    padding-top: 40px;
+}
+
+h2, h3, h4, h5, h6 {
+    font-weight: normal;
+}
+
+h4 {
+    font-size: 16px;
+}
+
+i.fa {
+    pointer-events: none;
+}
+
+.section-header {
+    /*display: none;*/
+    text-align: center;
+    font-weight: 600;
+    background: #B8C1C8;
+    color: #FFF;
+    margin: 0 auto;
+}
+
+.vlib {
+    position: fixed;
+    z-index: 1000;
+    max-height: calc(100vh - 43px);
+    overflow-y: auto;
+    padding-top: 1px;
+    margin-left: -4px;
+    width: 100%;
+    max-width: inherit;
+}
+
+.v-playlist {
+    position: fixed;
+    z-index: 1000;
+    max-height: calc(100vh - 88px);
+    overflow-y: auto;
+    padding-top: 1px;
+    margin-right: -4px;
+    width: 100%;
+    max-width: inherit;
+}
+
+.v-element:hover .add-to-PL, .v-element:hover .del-from-PL, .vplist:hover .del-from-PL {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s;
+}
+
+.add-to-PL, .del-from-PL {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 400ms, visibility 0s linear 300ms;
+    cursor: pointer;
+    position: absolute;
+    z-index: 10;
+    width: 45px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: navajowhite;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.v-element .add-to-PL, .v-element .del-from-PL {
+    top: 10px;
+    right: 20px;
+}
+
+.add-to-PL {
+    background-image: url(../img/add-to-pl.svg);
+}
+
+.del-from-PL {
+    background-image: url(../img/del-from-pl.svg);
+    top: 48%;
+    right: 9px;
+}
+
+.togglePP {
+    /*z-index: 1100;*/
+    text-align: center;
+    height: 34px;
+    font-size: 22px;
+    margin: 5px;
+    border-radius: 5px;
+    background-color: #5966dc
+}
+
+.togglePP label {
+    padding: 0 9px;
+    cursor: pointer;
+}
+
+.clear-pl {
+    cursor: pointer;
+    /*z-index: 1100;*/
+    text-align: center;
+    white-space: nowrap;
+    /*width: 45px;*/
+    height: 34px;
+    margin: 5px 0;
+    border-radius: 5px;
+    font-weight: 700;
+    padding: 5px;
+    color: ghostwhite;
+    /*background-image: url(../img/clear-pl.svg);*/
+    background-color: #dc3545;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.vplist {
+    display: flex;
+    margin: 0 10px 8px;
+    position: relative;
+}
+
+.v-element {
+    /*float: left;*/
+    padding-left: 10px;
+    padding-right: 10px;
+    display: inline-block;
+    position: relative;
+    margin-bottom: 15px;
+}
+
+#play-pause-playlist:checked ~ i.fa-pause-circle-o, #vp-play-pause:checked ~ i.fa-pause {
+    display: initial;
+}
+
+#play-pause-playlist:checked ~ i.fa-play-circle-o, #vp-play-pause:checked ~ i.fa-play {
+    display: none;
+}
+
+i.fa-pause-circle-o, i.fa-pause {
+    display: none;
+}
+
+i.fa-play-circle-o, i.fa-play {
+    display: initial;
+}
+
+.video-preview__title {
+    position: absolute;
+    z-index: 1;
+    bottom: 10px;
+    left: 16px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: calc(100% - 80px);
+}
+
+.video-preview__duration {
+    position: absolute;
+    z-index: 1;
+    bottom: 10px;
+    right: 16px;
+    color: hsl(0, 0%, 100%);
+    letter-spacing: .5px;
+    font-weight: 500;
+    line-height: 1.2rem;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+}
+
+.video-preview__image {
+    width: 100%;
+    border-radius: .25rem;
+}
+
+.vplayer {
+    /*height: 341px;*/
+}
+
+.vplayer:hover .vp-container-bottom {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s;
+}
+
+/*  VIDEO Player Custom Controls */
+
+.vp-container-bottom {
+    position: relative;
+    bottom: 55px;
+    height: 39px;
+    width: 100%;
+    /*left: 10px;*/
+    padding: 3px 10px 0;
+    z-index: 10;
+    text-align: left;
+    direction: ltr;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 600ms, visibility 0s linear 300ms;
+}
+
+.vp-progress-bar-container {
+    cursor: pointer;
+    display: block;
+    position: absolute;
+    height: 4px;
+    width: 100%;
+    bottom: 45px;
+    left: 0;
+    background-color: lightgrey;
+}
+
+.vp-progress-bar-container:hover {
+    height: 5px;
+}
+
+.vp-progress-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    z-index: 31;
+    outline: none;
+    touch-action: none;
+    background-color: darkred;
+}
+
+.vp-progress-bar-container:hover .vp-progress-bar-handle {
+    display: initial;
+}
+
+.vp-progress-bar-padding {
+    position: absolute;
+    width: 100%;
+    height: 16px;
+    bottom: 0;
+    z-index: 28;
+}
+
+.vp-controls {
+    height: 36px;
+    line-height: 36px;
+    font-size: 109%;
+    text-align: left;
+    direction: ltr;
+}
+
+.vp-left-controls {
+    float: left;
+    height: 100%;
+}
+
+.vp-right-controls {
+    float: right;
+    height: 100%;
+}
+
+.vp-controls label {
+    width: 2.5em;
+    margin: 0;
+}
+
+.vp-volume-panel {
+    display: inline-block;
+    width: 130px;
+    /*height: 100%;*/
+    /*cursor: pointer;*/
+    outline: 0;
+    transition: margin .2s cubic-bezier(0.4, 0.0, 1, 1), width .2s cubic-bezier(0.4, 0.0, 1, 1);
+}
+
+.vp-volume-slider {
+    height: 12px;
+    position: relative;
+    /*overflow: hidden;*/
+    touch-action: none;
+}
+
+.vp-volume-slider-handle {
+    width: 100%;
+    height: 10px;
+    cursor: pointer;
+}
+
+.vp-progress-bar-handle {
+    left: 0;
+    display: none;
+}
+
+.vp-progress-bar-handle {
+    position: absolute;
+    top: 50%;
+    width: 12px;
+    height: 12px;
+    border-radius: 6px;
+    margin-top: -6px;
+    background: #fff;
+    z-index: 35;
+}
+
+.vp-progress-bar-handle:hover {
+    background: yellow;
+    box-shadow: 0px 0px 6px 5px yellowgreen;
+}
+
+#vp-volume-mute:checked ~ i.fa-volume-off {
+    display: initial;
+}
+
+#vp-volume-mute:checked ~ i.fa-volume-up {
+    display: none;
+}
+
+.fa-volume-off {
+    display: none;
+}
+
+.fa-volume-up {
+    display: initial;
+}

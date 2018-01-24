@@ -1,0 +1,71 @@
+.page-nav ul li {
+    list-style-type: none;
+}
+
+.page-nav ul, .page-nav label {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    z-index: 1000;
+}
+
+.page-nav ul {
+    display: inline-flex;
+}
+input[type="checkbox"].nav-menu {
+    right: 3px;
+    top: 6px;
+    position: relative;
+    /*margin: 0 0 0 0;*/
+    display: none;
+}
+
+input[type="checkbox"].nav-menu:checked ~ #vlibrary {
+    display: none;
+}
+
+/* NAVIGATION */
+.nav-menu {
+    /* гамбургер */
+    color: red;
+    /*float: right;*/
+    font-size: 1.7em;
+    margin: 6px;
+    /*padding: 0 6% 0 0;*/
+    cursor: pointer;
+}
+
+.page-nav {
+    display: inline-flex;
+    width: 100%;
+    border-bottom: 2px #F1F8E9 solid;
+    border-left: 2px #F1F8E9 solid;
+    border-right: 2px #F1F8E9 solid;
+    border-radius: 0 0 5px 5px;
+    padding: 0 0;
+    background: #B8C1C8;
+    /*margin: 0 auto 0;*/
+    height: 35px;
+    /*box-sizing: border-box;*/
+}
+
+.page-nav li {
+    float: left;
+    /*width: 35%;*/
+}
+
+.page-nav a {
+    display: block;
+    color: #F1F8E9;
+    /*font-weight: bold;*/
+    text-align: center;
+    /*height: 1.8em;*/
+    padding: 3px 5px;
+    box-sizing: border-box;
+}
+
+.page-nav li a:hover {
+    transition-property: background-color;
+    transition: all 600ms ease;
+    background-color: #bebebe;
+}

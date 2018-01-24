@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Видеоплеер</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          crossorigin="anonymous">
+    <!-- шрифты Font-Awesome -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<nav class="navbar fixed-top navbar-light bg-light p-1">
+    <nav class="page-nav">
+        <label for="nav-menu" data-toggle="collapse" data-target="#navbarToggleExternalContent"
+               aria-controls="navbarToggleExternalContent" aria-expanded="true" aria-label="Toggle navigation"
+               title="Скрыть / отобразить библиотеку видео">
+            <i class="fa fa-bars nav-menu" aria-hidden="true"></i>
+        </label>
+        <input type="checkbox" id="nav-menu" class="nav-menu">
+        <div class="col-md-3 col-sm-4 px-1" id="vlibrary">
+            <h3 class="section-header">Video Library</h3>
+        </div>
+        <div class="col-md col-sm px-1">
+            <h3 class="section-header">Video Player</h3>
+        </div>
+        <div class="col-md-3 col-sm-4 px-1 d-none" id="playlist-menu_id">
+            <h3 class="section-header">Video Playlist</h3>
+        </div>
+    </nav>
+</nav>
+<div class="container-fluid">
+    <div class="row py-1">
+        <!-- Video Library section here -->
+        <div class="col-md-3 col-sm-4 px-1 collapse show" id="navbarToggleExternalContent">
+            <aside class="vlib">
+                <article class="v-element">
+                    <div class="add-to-PL" id="vl_886045219" data-vtype="mp4" title="добавить видео в Плейлист"></div>
+                    <img class="video-preview__image" src="img/886045219_thumbs.jpg"
+                         alt="video preview image">
+                    <span class="video-preview__title">Red-Bellied Woodpecker</span>
+                    <span class="video-preview__duration">0:18</span>
+                </article>
+                <article class="v-element">
+                    <div class="add-to-PL" id="vl_343732582" data-vtype="mp4" title="добавить видео в Плейлист"></div>
+                    <img class="video-preview__image" src="img/343732582_thumbs.jpg" srcset="" sizes=""
+                         alt="video preview image">
+                    <span class="video-preview__title">High Angle View Of Waterfalls</span>
+                    <span class="video-preview__duration">0:28</span>
+                </article>
+                <article class="v-element">
+                    <div class="add-to-PL" id="vl_717917364" data-vtype="mp4" title="добавить видео в Плейлист"></div>
+                    <img class="video-preview__image" src="img/717917364_thumbs.jpg" srcset="" sizes=""
+                         alt="video preview image">
+                    <span class="video-preview__title">High Angle View Of Waterfalls</span>
+                    <span class="video-preview__duration">0:46</span>
+                </article>
+                <article class="v-element">
+                    <div class="add-to-PL" id="vl_796795578" data-vtype="mp4" title="добавить видео в Плейлист"></div>
+                    <img class="video-preview__image" src="img/796795578_thumbs.jpg" srcset="" sizes=""
+                         alt="video preview image">
+                    <span class="video-preview__title">High Angle View Of Waterfalls</span>
+                    <span class="video-preview__duration">0:45</span>
+                </article>
+                <article class="v-element">
+                    <div class="add-to-PL" id="vl_846429130" data-vtype="mp4" title="добавить видео в Плейлист"></div>
+                    <img class="video-preview__image" src="img/846429130_thumbs.jpg" srcset="" sizes=""
+                         alt="video preview image">
+                    <span class="video-preview__title">High Angle View Of Waterfalls</span>
+                    <span class="video-preview__duration">0:30</span>
+                </article>
+            </aside>
+        </div>
+
+        <!-- Video Player section here -->
+        <div class="col-md col-sm px-1">
+            <div class="card">
+                <div class="card-body p-2">
+                    <div class="vplayer">
+                        <video class="vplayer" width="100%" preload="metadata">
+                            <source class="vplayer" src="" type="">
+                            Video type not supported by this browser
+                        </video>
+                        <!-- Video controls here -->
+                        <div class="vp-container-bottom">
+                            <div class="vp-progress-bar-container">
+                                <div class="vp-progress-bar-padding"></div>
+                                <div class="vp-progress-bar">
+                                    <div class="vp-progress-bar-handle"></div>
+                                </div>
+                            </div>
+                            <div class="vp-controls">
+                                <div class="vp-left-controls">
+                                    <label for="vp-play-pause" class="btn btn-outline-success vp-play-pause"
+                                           title="Воспроизведение">
+                                        <input type="checkbox" id="vp-play-pause" class="d-none">
+                                        <i class="fa fa-play" aria-hidden="true"></i>
+                                        <i class="fa fa-pause" aria-hidden="true"></i>
+                                    </label>
+                                    <label class="btn btn-outline-success vp-stop" title="Остановить">
+                                        <i class="fa fa-stop" aria-hidden="true"></i>
+                                    </label>
+                                    <label class="btn btn-outline-success vp-next" title="Следующий трек">
+                                        <i class="fa fa-forward" aria-hidden="true"></i>
+                                    </label>
+                                    <label class="btn btn-outline-success vp-prev" title="Предыдущий трек">
+                                        <i class="fa fa-backward" aria-hidden="true"></i>
+                                    </label>
+                                </div>
+                                <div class="vp-right-controls">
+                                    <label for="vp-volume-mute" class="btn btn-outline-success vp-volume"
+                                           data-title="Включить громкость" title="Отключить громкость">
+                                        <input type="checkbox" id="vp-volume-mute" class="d-none">
+                                        <i class="fa fa-volume-up" aria-hidden="true"></i>
+                                        <i class="fa fa-volume-off" aria-hidden="true"></i>
+                                    </label>
+                                    <div class="vp-volume-panel" role="slider" aria-valuemin="0" aria-valuemax="100"
+                                         tabindex="0" aria-valuenow="50" aria-valuetext="50% громкость">
+                                        <div class="vp-volume-slider">
+                                            <input type="range" class="vp-volume-slider-handle" value="100">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Video controls ended -->
+                    <h5 class="card-title vplayer-ctitle"></h5>
+                    <p class="card-text vplayer-ctext"></p></div>
+            </div>
+        </div>
+
+        <!-- Playlist section here -->
+        <div class="col-md-3 col-sm-1 px-1 d-none" id="playlist_id">
+            <div class="container px-1 d-none" id="pl-menu-bar">
+                <div class="d-flex justify-content-center">
+                    <div class="clear-pl" title="Очистить весь плейлист">
+                        <i class="fa fa-trash-o fa-lg"></i> Очистить
+                    </div>
+                    <div class="togglePP">
+                        <label for="play-pause-playlist" title="Воспроизвести плейлист">
+                            <input type="checkbox" id="play-pause-playlist" class="d-none" disabled>
+                            <i class="fa fa-play-circle-o" aria-hidden="true"></i>
+                            <i class="fa fa-pause-circle-o" aria-hidden="true"></i>
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-sm btn-group-toggle" id="toggle-play-type" data-toggle="buttons">
+                        <label id="pl-conseq-play" class="btn btn-secondary my-1 active"
+                               title="Последовательное воспроизведение">
+                            <i class="fa fa-repeat" aria-hidden="true"></i>
+                            <input type="radio" name="options" autocomplete="off" checked>
+                        </label>
+                        <label id="pl-random-play" class="btn btn-secondary my-1" title="Случайное воспроизведение">
+                            <i class="fa fa-random" aria-hidden="true"></i>
+                            <input type="radio" name="options" autocomplete="off">
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="v-playlist">
+                <!-- Template will be inserted here -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Template for playlist here -->
+<template data-class="vplist card bg-light mb-3">
+    <div class="del-from-PL" title="удалить видео из Плейлиста"></div>
+    <img class="play-on-dblclick card-img-top" src="" alt="Card image cap" title="двойной клик для воспроизведения">
+    <div class="card-body">
+        <h4 class="card-title">video header</h4>
+        <p class="card-text">some video description</p>
+    </div>
+</template>
+
+<script type="module" src="js/script.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"
+        crossorigin="anonymous"></script>
+</body>
+</html>
