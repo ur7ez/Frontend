@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Angular. Карточка футболиста</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          crossorigin="anonymous">
+    <!-- шрифты Font-Awesome -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <!-- AngularJS 1.6.7 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
+</head>
+<body data-ng-app="mySelect">
+<!--
+На странице поместить select, в котором будет список футболистов (все характеристики футболиста хранить в обьектах). При выборе из выпадающего списка необходимо подгрузить основную информацию. При этом необходимо реализовать динамическую подгрузку шаблона. Для каждого футболиста сделать свой шаблон.
+-->
+<h3>ТОП-100 лучших футболистов в истории чемпионатов мира</h3>
+<address>по версии <a href="https://www.sport-express.ru/football/world/2014/reviews/827376/" target="_blank">
+    www.sport-express.ru</a></address>
+<div data-ng-controller="optionsController">
+    <label for="fb_player">Выберите футболиста:
+        <select id="fb_player" data-ng-model="fp"
+                data-ng-options="player.name group by player.country for player in players">
+            <option value="">-- choose player --</option>
+        </select>
+    </label>
+    <hr>
+    <div my-player></div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/players.js"></script>
+</body>
+</html>
