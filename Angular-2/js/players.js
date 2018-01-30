@@ -1,6 +1,6 @@
 angular.module('mySelect', [])
-    .controller('optionsController', ['$scope', function ($scope) {
-        $scope.players = [
+    .controller('optionsController', function () {
+        this.players = [
             {
                 id: 1,
                 name: 'ПЕЛЕ',
@@ -603,10 +603,10 @@ angular.module('mySelect', [])
                 matches_goals: '10/4'
             },
         ];
-        $scope.fp = $scope.players[0];
-    }])
-    .directive('myPlayer', function () {
+        this.fp = this.players[0];
+    });
+    /*.directive('myPlayer', function () {
         return {
             templateUrl: 'fplayer_info.html'
         };
-    });
+    });*/

@@ -1,7 +1,4 @@
-angular.module('myApp', []);
-let myMenu = angular.module('myMenu', []);
-
-let menu = function () {
+let menuController = function () {
     this.menuItems = [
         {
             menu: 'File', submenu: [
@@ -53,4 +50,5 @@ let menu = function () {
     ];
 };
 
-myMenu.controller('menuController', menu);
+let myMenu = angular.module('myMenu', []);
+myMenu.controller('menuController', menuController);

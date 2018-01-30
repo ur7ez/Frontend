@@ -6,13 +6,9 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Angular. Карточка футболиста</title>
-    <!-- Bootstrap -->
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
           crossorigin="anonymous">
-    <!-- шрифты Font-Awesome -->
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
-    <!-- AngularJS 1.6.7 -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
 </head>
 <body data-ng-app="mySelect">
 <!--
@@ -21,21 +17,20 @@
 <h3>ТОП-100 лучших футболистов в истории чемпионатов мира</h3>
 <address>по версии <a href="https://www.sport-express.ru/football/world/2014/reviews/827376/" target="_blank">
     www.sport-express.ru</a></address>
-<div data-ng-controller="optionsController">
+<div data-ng-controller="optionsController as main">
     <label for="fb_player">Выберите футболиста:
-        <select id="fb_player" data-ng-model="fp"
-                data-ng-options="player.name group by player.country for player in players">
+        <select id="fb_player" data-ng-model="main.fp"
+                data-ng-options="player.name group by player.country for player in main.players">
             <option value="">-- choose player --</option>
         </select>
     </label>
     <hr>
-    <div my-player></div>
+    <!--<div my-player></div>-->
+    <div data-ng-include="'fplayer_info.html'"></div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"
-        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
-<script src="js/bootstrap.bundle.min.js"></script>
+<!-- AngularJS 1.6.7 -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
 <script src="js/players.js"></script>
 </body>
 </html>

@@ -6,13 +6,11 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Angular. Nav menu</title>
-    <!-- Bootstrap -->
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
           crossorigin="anonymous">
     <!-- шрифты Font-Awesome -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
-    <!-- AngularJS 1.6.7 -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
 </head>
 <body data-ng-app="myMenu">
 <div data-ng-controller="menuController as menu">
@@ -23,17 +21,19 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <a class="dropdown-item" href="#" data-ng-repeat="sub in main.submenu">
-                    <i data-ng-if="sub.imgClass !== '' && sub.imgClass !== undefined" class="fa {{sub.imgClass}}" aria-hidden="true"></i>
+                    <i data-ng-if="sub.imgClass !== '' && sub.imgClass !== undefined" class="fa {{sub.imgClass}}"
+                       aria-hidden="true"></i>
                     {{sub.name}}</a>
             </div>
         </li>
     </ul>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"
-        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
+<!-- AngularJS 1.6.7 -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="js/bootstrap.bundle.min.js"></script>
-<script src="js/script.js"></script>
+<script src="js/menu.js"></script>
 </body>
 </html>
