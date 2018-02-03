@@ -1,12 +1,12 @@
 <style>
     .album {
-        /*width: {{width}}px;*/
-        /*height: {{height}}px;*/
+        /*width: {{width}} px;*/
+        /*height: {{height}} px;*/
         column-count: {{inRow}};
         -webkit-column-count: {{inRow}};
         -moz-column-count: {{inRow}};
-        -moz-column-gap: 0px;
-        column-gap: 7px;
+        -moz-column-gap: 10px;
+        column-gap: 10px;
     }
 
     .album img {
@@ -16,20 +16,22 @@
     }
 
     .album-card {
-        display: inline-block;
+        display: block;
         margin-bottom: 10px;
         border: 1px solid lightgrey;
         border-radius: {{corners}}px;
+        break-inside: avoid-column;
     }
 
 </style>
-
-<div class="album">
-    <div class="album-card" data-ng-repeat="item in album.albumItems">
-        <img class="card-img-top" src="{{item.src}}" alt="image cap">
-        <div class="card-body p-2">
-            <h5 class="card-title">{{item.title}}</h5>
-            <p class="card-text">{{classGr}} - {{item.description}}</p>
+<div class="row">
+    <div class="album">
+        <div class="album-card" data-ng-repeat="item in album.albumItems">
+            <img class="card-img-top" src="{{item.src}}" alt="image cap">
+            <div class="card-body p-2">
+                <h5 class="card-title">{{item.title}}</h5>
+                <p class="card-text">{{classGr}} - {{item.description}}</p>
+            </div>
         </div>
     </div>
 </div>
