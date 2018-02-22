@@ -7,11 +7,11 @@ export default class Input extends Component {
         this.handleClick = this.handleClick.bind(this);
     }
 
-    handleChange =(e) => {
+    handleChange = (e) => {
         this.setState({chk: e.target.checked});
     };
     handleClick = (e) => {
-        console.log('chk: '+!this.state.chk);
+        console.log('chk: ' + !this.state.chk);
         this.setState({chk: !this.state.chk});
     };
 
@@ -21,8 +21,9 @@ export default class Input extends Component {
                 <button onClick={this.handleClick}>{this.state.value}</button>
                 <br/>
                 <label htmlFor="inp1">
-                    <input id="inp1" type="checkbox" value={this.props.val} checked={this.state.chk} onChange={this.handleChange}/>
-                    {this.props.val}</label>
+                    <input id="inp1" type="checkbox" value={this.props.val} checked={this.state.chk}
+                           onChange={this.handleChange}/>{this.props.val}
+                </label>
             </div>
         );
     }
