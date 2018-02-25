@@ -11,7 +11,6 @@ export default class Input extends Component {
         this.setState({chk: e.target.checked});
     };
     handleClick = (e) => {
-        console.log('chk: ' + !this.state.chk);
         this.setState({chk: !this.state.chk});
     };
 

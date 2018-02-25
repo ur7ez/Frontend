@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
-import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom'
-import {About, Product, Products} from './components/myRoute';
+import {BrowserRouter as Router, NavLink, Route, Switch} from 'react-router-dom'
 import Input from './components/input';
+import {About, Product, Products} from './components/myRoute';
+import {UsersList} from './components/UsersList/UsersList';
+import {User} from "./components/UsersList/User";
 import OrderForm from './components/OrderForm/OrderForm';
 import logo from './logo.svg';
 import './App.css';
-
-// import Button from './components/button';
 
 class App extends Component {
     constructor(props) {
@@ -26,14 +26,21 @@ class App extends Component {
                 </p>
                 <Input val="my ReactJS CheckBox"/>
                 <Router>
-                    <nav style={{listStyle: 'none'}}>
-                        <li><Link to="/">About</Link></li>
-                        <li><Link to="/products">Products</Link></li>
-                        <li><Link to="/product">Product 1</Link></li>
+                    <nav>
+                        <NavLink activeClassName="active" exact to="/"
+                                 activeStyle={{color: "green", fontWeight: "bold"}}>About</NavLink>
+                        <NavLink activeClassName="active" to="/products"
+                                 activeStyle={{color: "green", fontWeight: "bold"}}>Products</NavLink>
+                        <NavLink activeClassName="active" to="/product"
+                                 activeStyle={{color: "green", fontWeight: "bold"}}>Product 1</NavLink>
+                        <NavLink activeClassName="active" to="/users"
+                                 activeStyle={{color: "green", fontWeight: "bold"}}>Users</NavLink>
                         <Switch>
                             <Route exact path="/" component={About}/>
-                            <Route exact path="/products" component={Products}/>
-                            <Route exact path="/product" component={Product}/>
+                            <Route path="/products" component={Products}/>
+                            <Route path="/product" component={Product}/>
+                            <Route path="/users" component={UsersList}/>
+                            <Route path="/user/:id(\d+)" component={User}/>
                         </Switch>
                     </nav>
                 </Router>
