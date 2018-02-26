@@ -1,6 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
-import Item from './Item'
+import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom'
 import User from './User'
 
 export class UsersList extends React.Component {
@@ -20,17 +19,21 @@ export class UsersList extends React.Component {
         return (
             <div>
                 <h2>Users:</h2>
-                <Router>
-                    <ul>
-                        {
-                            this.state.users.map(user => <Item key={user.id} item={user}/>)
-                        }
-                        <Switch>
-                            <Route path={`${this.props.match.url}/:id`}
-                                   render={(props) => <User name={this.state.users} {...props}/>}/>
-                        </Switch>
-                    </ul>
-                </Router>
+                <ul>
+                    {
+                        this.state.users.map(user =>
+                            <Router key={user.id}>
+                                <li><Link to={`/users/${user.id}`}>{user.name}</Link>
+                                    <Switch>
+                                        <Route path={`${this.props.match.url}/:id`}
+                                               render={(props) => <User name={this.state.users} {...props}/>}/>
+                                    </Switch>
+                                </li>
+                            </Router>
+                        )
+                    }
+
+                </ul>
             </div>
         );
     }

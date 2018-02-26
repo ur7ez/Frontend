@@ -12,15 +12,18 @@ export default class User extends React.Component {
             .then(response => response.json())
             .then(json => this.setState({user: json}));
 
-        if (this.props !== undefined && this.props.name[this.state.id - 1] !== undefined) {
+        if (this.props !== undefined && this.props.name !== undefined && this.props.name[this.state.id - 1] !== undefined) {
             let name = this.props.name[this.state.id - 1];
-            console.log('name: ', name);
             this.setState({name: name.name});
+        } else {
+            let users_url = 'https://jsonplaceholder.typicode.com/users';
+            fetch(users_url)
+                .then(response => response.json())
+                .then(json => this.setState({name: json[this.state.id - 1].name}));
         }
     }
 
     render() {
-        console.log(this.state);
         return (
             <div>
                 <h2>User {this.state.name}:</h2>

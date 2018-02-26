@@ -7,6 +7,7 @@ import {BrowserRouter as Router, NavLink, Route, Switch} from 'react-router-dom'
 import Input from './components/input';
 import {About, Product, Products} from './components/myRoute';
 import {UsersList} from './components/UsersList/UsersList';
+import User from './components/UsersList/User';
 import OrderForm from './components/OrderForm/OrderForm';
 import ToDo from './components/ToDoList/ToDo';
 
@@ -42,6 +43,7 @@ class App extends Component {
                             <Route path="/products" component={Products}/>
                             <Route path="/product" component={Product}/>
                             <Route exact path="/users" component={UsersList}/>
+                            <Route path="/users/:id(\d+)" component={User}/>
                         </Switch>
                     </nav>
                 </Router>
