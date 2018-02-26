@@ -1,12 +1,14 @@
+import logo from './logo.svg';
+import './App.css';
+
 import React, {Component} from 'react';
 import {BrowserRouter as Router, NavLink, Route, Switch} from 'react-router-dom'
+
 import Input from './components/input';
 import {About, Product, Products} from './components/myRoute';
 import {UsersList} from './components/UsersList/UsersList';
-import {User} from "./components/UsersList/User";
 import OrderForm from './components/OrderForm/OrderForm';
-import logo from './logo.svg';
-import './App.css';
+import ToDo from './components/ToDoList/ToDo';
 
 class App extends Component {
     constructor(props) {
@@ -39,13 +41,13 @@ class App extends Component {
                             <Route exact path="/" component={About}/>
                             <Route path="/products" component={Products}/>
                             <Route path="/product" component={Product}/>
-                            <Route path="/users" component={UsersList}/>
-                            <Route path="/user/:id(\d+)" component={User}/>
+                            <Route exact path="/users" component={UsersList}/>
                         </Switch>
                     </nav>
                 </Router>
                 <br/>
                 <OrderForm id="form_1" formMethod="post" formAction="#" formName="form_submit"/>
+                <ToDo/>
             </div>
         );
     }
