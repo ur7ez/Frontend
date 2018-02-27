@@ -23,7 +23,7 @@ export class UsersList extends React.Component {
                     {
                         this.state.users.map(user =>
                             <Router key={user.id}>
-                                <li><Link to={`/users/${user.id}`}>{user.name}</Link>
+                                <li><Link to={`${this.props.match.url}/${user.id}`}>{user.name}</Link>
                                     <Switch>
                                         <Route path={`${this.props.match.url}/:id`}
                                                render={(props) => <User name={this.state.users} {...props}/>}/>
