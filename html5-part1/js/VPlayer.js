@@ -22,11 +22,9 @@ let VPlayer = class {
         // if (!pb_type) this.queueShuffle();
     }
 
-    togglePlayPause(vID = this.pbQueueIter.next().value,
-                    posterStr = '',
-                    forcePlay = false) {
+    togglePlayPause(vID = this.pbQueueIter.next().value, posterStr = '') {
         if (this.lastVideo.id !== undefined && this.lastVideo.id === vID) { // видео с таким id в данный момент уже загружено
-            if (this.videoPlayer.paused || forcePlay) {
+            if (this.videoPlayer.paused) {
                 this.videoPlayer.play();
             } else {
                 if (this.isLoaded) {
@@ -42,6 +40,8 @@ let VPlayer = class {
             if (posterStr === '') posterStr = `img/${vID}_snapshot.jpg`;
             let pl_elem = document.querySelector(`#pl_${vID}`).dataset.src;
             let v_src = (pl_elem) ? pl_elem : `${this.vSource}${vID}.${vType}`;
+            VPlayer.togglePL_state(vID, this.lastVideo.id);
+
             document.querySelector('.vplayer-ctitle').innerHTML =
                 document.querySelector(`#pl_${vID} .card-title`).innerText;
             document.querySelector('.vplayer-ctext').innerHTML =
@@ -56,6 +56,7 @@ let VPlayer = class {
                 this.videoSource.setAttribute('src', v_src);
                 this.videoSource.setAttribute('type', `video/${vType}`);
                 this.videoPlayer.setAttribute('poster', posterStr);
+                this.videoPlayer.dataset.src_id = vID;
                 this.videoPlayer.load();
                 let playPromise = this.videoPlayer.play();
                 if (playPromise !== undefined) {
@@ -159,12 +160,14 @@ let VPlayer = class {
             this.pbQueue.set(id, vType);
             this.logger('Очередь воспроизведения расширена:', this.pbQueue);
         }
+        if (this.lastVideo.id === id) VPlayer.togglePL_state(id, null);
     }
 
     queueDelFrom(id) {
-        if (this.pbQueue.size === 0) return;
+        // if (this.pbQueue.size === 0) return;
         if (this.pbQueue.size !== 0) {
             this.pbQueue.delete(id);   //this.pbQueue.splice(this.pbQueue.indexOf(id), 1);
+            this.pbQueueArr.splice(this.pbQueueArr.indexOf(id), 1);
         }
         if (this.pbQueue.size === 0) {
             this.logger('Очередь воспроизведения очищена');
@@ -232,6 +235,29 @@ let VPlayer = class {
         this.pbQueue.clear();
         this.shuffled = false;
         this.logger('Очередь воспроизведения очищена');
+    }
+
+    /**
+     * Подсветка в плейлисте текущего воспроизводимого видео
+     * @param currID
+     * @param prevID
+     */
+    static togglePL_state(currID, prevID) {
+        let elem;
+        if (prevID !== undefined && prevID !== null) {
+            elem = document.querySelector(`#pl_${prevID}`);
+            if (elem !== null) {
+                elem.classList.add('bg-light');
+                elem.classList.remove('bg-warning', 'border-success');
+            }
+        }
+        if (currID !== prevID) {
+            elem = document.querySelector(`#pl_${currID}`);
+            if (elem !== null) {
+                elem.classList.remove('bg-light');
+                elem.classList.add('bg-warning', 'border-success');
+            }
+        }
     }
 
     logger() {

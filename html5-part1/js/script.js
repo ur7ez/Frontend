@@ -95,7 +95,7 @@ function toggleVP(event) {
     // добавление в Видеоплеер для незагруженного трека или пауза / воспроизведение для уже загруженного трека
     if (curElem.classList.contains('play-on-dblclick')) {
         let id = curElem.parentNode.id.substr(3);
-        myVP.togglePlayPause(id, curElem.getAttribute('src'), false);
+        myVP.togglePlayPause(id, curElem.getAttribute('src'));
     }
 }
 
@@ -143,9 +143,13 @@ function videoSyncWithPL(event) {
     if (event.type !== 'timeupdate') myVP.logger('video status: ', event.type);
     switch (event.type) {
         case 'play':  //Синхронизирует состояние кнопки "#toggle-play-type" для плейлиста
+            togglePLState(true);
+            break;
         case 'pause':
+            togglePLState(false);
+            break;
         case 'loadeddata':
-            togglePLState(event.type !== 'pause');
+            togglePLState(true);
             break;
         case 'timeupdate':
             vpProgressUpdate();
@@ -265,7 +269,7 @@ function vpVolumeUpdate(event) {
 }
 
 // ----------------------------- general Events --------------------------------
-// добавление / удаление в плейлист:
+// добавление / удаление в плейлисте:
 document.querySelector('.vlib').addEventListener('click', togglePL, true);
 document.querySelector('.v-playlist').addEventListener('click', togglePL, true);
 
