@@ -1,8 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
+import './components/ToDoList/ToDo.css';
 
 import React, {Component} from 'react';
-import {BrowserRouter as Router, NavLink, Route, Switch} from 'react-router-dom'
+import {BrowserRouter as Router, NavLink, Route, Switch} from 'react-router-dom';
+import {Provider} from 'react-redux';
+import {createStore} from 'redux';
 
 import {Main} from "./components/Products/Main";
 import {Products} from './components/Products/Products';
@@ -14,7 +17,12 @@ import {UsersList} from './components/UsersList/UsersList';
 import User from './components/UsersList/User';
 import OrderForm from './components/OrderForm/OrderForm';
 
-import ToDo from './components/ToDoList/ToDo';
+import ToDo from './components/ToDoList_pure/ToDo';
+
+import todoApp from './reducers/index';
+import TodoApp from './components/ToDoList/TodoApp';
+
+let store = createStore(todoApp);
 
 class App extends Component {
     constructor(props) {
@@ -53,9 +61,13 @@ class App extends Component {
                         </Switch>
                     </nav>
                 </Router>
+                <ToDo/>  {/*старый вариант реализации - без Redux*/}
                 <br/>
+                <Provider store={store}>
+                    <TodoApp/>
+                </Provider>
+
                 <OrderForm id="form_1" formMethod="post" formAction="#" formName="form_submit"/>
-                <ToDo/>
             </div>
         );
     }

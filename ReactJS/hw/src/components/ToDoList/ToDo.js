@@ -1,69 +1,33 @@
-import React from "react";
-import Tasks from './Tasks';
-import './ToDo.css';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-export default class ToDo extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            task: '',
-            tasks: [],
-            updTaskID: null
-        };
-    }
+const Todo = ({onChange, onDelete, onUpdate, completed, text}) => (
+    <div>
+        <button style={{margin: "0 10px 0 0"}} onClick={onDelete}
+                title="push to delete this task">X
+        </button>
+        <li
+            style={{
+                display: "inline",
+                cursor: 'pointer',
+                textDecoration: completed ? 'line-through' : 'none'
+            }}
+            onClick={onUpdate}
+            title="click to edit this task"
+        >
+            {text}
+        </li>
+        <input type="checkbox" title="toggle this task between active / completed"
+               onChange={onChange} checked={completed ? 'checked' : ''}/>
+    </div>
+);
 
-    onChange = (event) => {
-        this.setState({task: event.target.value});
-    };
+Todo.propTypes = {
+    onDelete: PropTypes.func.isRequired,
+    onChange: PropTypes.func.isRequired,
+    onUpdate: PropTypes.func.isRequired,
+    completed: PropTypes.bool.isRequired,
+    text: PropTypes.string.isRequired
+};
 
-    addTask = (event) => {
-        event.preventDefault();
-        let task = this.state.task.trim();
-        if (task.length === 0 || !task || /^\s*$/.test(task)) return;
-        task.replace(/\s+/g, ' ').replace(/^\s+|\s+$/, '');
-        if (this.state.tasks.includes(task)) return;
-        if (this.state.updTaskID !== null) {
-            let tmp = this.state.tasks.concat();
-            tmp.splice(this.state.updTaskID, 1, task);
-            this.setState({
-                task: '',
-                tasks: [...tmp],
-                updTaskID: null
-            });
-        } else {
-            this.setState({
-                task: '',
-                tasks: [...this.state.tasks, task]
-            });
-        }
-    };
-
-    onTaskDel = (task) => {
-        let tmp = this.state.tasks.concat();
-        tmp.splice(task, 1);
-        this.setState({
-            tasks: [...tmp]
-        });
-    };
-
-    onUpdateTask = (task, id) => {
-        this.setState({task: task, updTaskID: id});
-    };
-
-    render() {
-        let status = "Add Task";
-        status = (this.state.updTaskID === null) ? status : "Update Task";
-        return (
-            <div>
-                <br/>
-                <form className="ToDo" onSubmit={this.addTask}>
-                    <input placeholder="add task to the list" id="todoInput" value={this.state.task}
-                           onChange={this.onChange}/>
-                    <input type="submit" id="submitTask" value={status}/>
-                </form>
-                <br/>
-                <Tasks tasks={this.state.tasks} deleteTask={this.onTaskDel} updateTask={this.onUpdateTask}/>
-            </div>
-        );
-    }
-}
+export default Todo;
